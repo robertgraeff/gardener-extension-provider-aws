@@ -27,10 +27,7 @@ imports:
 # versions of item with name 'aws'
 - name: kubernetesVersions
   schema:
-    type: object
-    properties:
-      versions:
-        type: array
+    type: array
 
 # data from landscape-*-setup/landscape.yaml section gardener-extension-provider-aws.values
 - name: controllerRegistration
