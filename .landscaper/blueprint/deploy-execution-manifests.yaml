@@ -133,7 +133,7 @@ deployItems:
           {{- toYaml .imports.cloudProfile.machineImages | nindent 10 }}
           kubernetes:
             versions:
-            {{- toYaml .imports.kubernetesVersions.versions | nindent 12 }}
+            {{- toYaml .imports.kubernetesVersions | nindent 12 }}
           # Note:
           # - Please don't add machine types that don't have at least 2 CPU cores and 3Gi of memory.
           #   The allocatable resources on such "small" machines are not enough to run the system components
