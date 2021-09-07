@@ -22,7 +22,7 @@ deployItems:
           chart: {{ resolve ( $chart.access ) | toString | b64enc }}
           values:
             image:
-              {{- $image := getResource .cd "name" "gardener-extension-provider-aws-image" }}
+              {{- $image := getResource .cd "name" "gardener-extension-provider-aws" }}
               repository: {{ ociRefRepo ( $image.access.imageReference ) }}
               tag: {{ ociRefVersion ( $image.access.imageReference ) }}
             images:
