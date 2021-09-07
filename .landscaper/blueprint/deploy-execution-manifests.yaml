@@ -51,6 +51,8 @@ deployItems:
                 concurrentSyncs: {{ .imports.controllerRegistration.concurrentSyncs }}
               controlplane:
                 concurrentSyncs: {{ .imports.controllerRegistration.concurrentSyncs }}
+              dnsrecord:
+                concurrentSyncs: {{ .imports.controllerRegistration.concurrentSyncs }}
               healthcheck:
                 concurrentSyncs: {{ .imports.controllerRegistration.concurrentSyncs }}
               infrastructure:
