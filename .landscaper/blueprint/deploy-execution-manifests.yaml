@@ -139,42 +139,6 @@ deployItems:
           #   The allocatable resources on such "small" machines are not enough to run the system components
           #   and addons without disruptions.
           machineTypes:
-            - name: m6i.large
-              cpu: "2"
-              gpu: "0"
-              memory: 8Gi
-            - name: m6i.xlarge
-              cpu: "4"
-              gpu: "0"
-              memory: 16Gi
-            - name: m6i.2xlarge
-              cpu: "8"
-              gpu: "0"
-              memory: 32Gi
-            - name: m6i.4xlarge
-              cpu: "16"
-              gpu: "0"
-              memory: 64Gi
-            - name: m6i.8xlarge
-              cpu: "32"
-              gpu: "0"
-              memory: 128Gi
-            - name: m6i.12xlarge
-              cpu: "48"
-              gpu: "0"
-              memory: 192Gi
-            - name: m6i.16xlarge
-              cpu: "64"
-              gpu: "0"
-              memory: 256Gi
-            - name: m6i.24xlarge
-              cpu: "96"
-              gpu: "0"
-              memory: 384Gi
-            - name: m6i.32xlarge
-              cpu: "128"
-              gpu: "0"
-              memory: 512Gi
             - name: m5.large
               cpu: "2"
               gpu: "0"
@@ -199,6 +163,10 @@ deployItems:
               cpu: "48"
               gpu: "0"
               memory: 192Gi
+            - name: m5.16xlarge
+              cpu: "64"
+              gpu: "0"
+              memory: 256Gi
             - name: m5.24xlarge
               cpu: "96"
               gpu: "0"
@@ -287,6 +255,34 @@ deployItems:
               cpu: "96"
               gpu: "0"
               memory: 384Gi
+            - name: m5zn.large
+              cpu: "2"
+              gpu: "0"
+              memory: 8Gi
+            - name: m5zn.xlarge
+              cpu: "4"
+              gpu: "0"
+              memory: 16Gi
+            - name: m5zn.2xlarge
+              cpu: "8"
+              gpu: "0"
+              memory: 32Gi
+            - name: m5zn.3xlarge
+              cpu: "12"
+              gpu: "0"
+              memory: 48Gi
+            - name: m5zn.6xlarge
+              cpu: "24"
+              gpu: "0"
+              memory: 96Gi
+            - name: m5zn.12xlarge
+              cpu: "48"
+              gpu: "0"
+              memory: 192Gi
+            - name: m5zn.metal
+              cpu: "48"
+              gpu: "0"
+              memory: 192Gi
             - name: m6g.2xlarge
               cpu: "8"
               gpu: "0"
@@ -400,6 +396,10 @@ deployItems:
               gpu: "0"
               memory: 96Gi
             - name: c5n.18xlarge
+              cpu: "72"
+              gpu: "0"
+              memory: 192Gi
+            - name: c5n.metal
               cpu: "72"
               gpu: "0"
               memory: 192Gi
@@ -581,6 +581,22 @@ deployItems:
               cpu: "96"
               gpu: "0"
               memory: 768Gi
+            - name: r5n.large
+              cpu: "2"
+              gpu: "0"
+              memory: 16Gi
+            - name: r5n.xlarge
+              cpu: "4"
+              gpu: "0"
+              memory: 32Gi
+            - name: r5n.2xlarge
+              cpu: "8"
+              gpu: "0"
+              memory: 64Gi
+            - name: r5n.4xlarge
+              cpu: "16"
+              gpu: "0"
+              memory: 128Gi
             - name: r5d.large
               cpu: "2"
               gpu: "0"
@@ -657,6 +673,26 @@ deployItems:
               cpu: "128"
               gpu: "0"
               memory: 3904Gi
+            - name: u-3tb1.56xlarge
+              cpu: "224"
+              gpu: "0"
+              memory: 3072Gi
+            - name: u-6tb1.56xlarge
+              cpu: "224"
+              gpu: "0"
+              memory: 6144Gi
+            - name: u-6tb1.112xlarge
+              cpu: "448"
+              gpu: "0"
+              memory: 6144Gi
+            - name: u-9tb1.112xlarge
+              cpu: "448"
+              gpu: "0"
+              memory: 9216Gi
+            - name: u-12tb1.112xlarge
+              cpu: "448"
+              gpu: "0"
+              memory: 12288Gi
             - name: u-6tb1.metal
               cpu: "448"
               gpu: "0"
@@ -723,6 +759,7 @@ deployItems:
             - name: io1
               class: standard
               usable: true
+              minSize: 4Gi
           regions:
           {{- if .imports.cloudProfile.regions }}
           {{- toYaml .imports.cloudProfile.regions | nindent 10 }}
