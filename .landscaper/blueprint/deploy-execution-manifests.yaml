@@ -100,14 +100,16 @@ deployItems:
             type: aws
           - kind: ControlPlane
             type: aws
+          - kind: DNSRecord
+            type: aws-route53
           - kind: Infrastructure
             type: aws
           - kind: Worker
             type: aws
           {{- end}}
-        deployment:
-          deploymentRefs:
-            - name: provider-aws
+          deployment:
+            deploymentRefs:
+              - name: provider-aws
     - policy: manage
       manifest:
         apiVersion: core.gardener.cloud/v1beta1
