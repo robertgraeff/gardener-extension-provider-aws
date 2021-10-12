@@ -6,6 +6,9 @@ imports:
   required: true
   targetType: landscaper.gardener.cloud/kubernetes-cluster
 
+- name: lssComponentDescriptor
+  type: componentDescriptorList
+
 - name: cloudProfile
   schema:
     type: object
@@ -64,15 +67,6 @@ imports:
                 type: string
       vpa:
         scheme:
-          type: object
-
-- name: imageVectorOverwrite
-  schema:
-    type: object
-    properties:
-      images:
-        type: array
-        items:
           type: object
 
 exports: []

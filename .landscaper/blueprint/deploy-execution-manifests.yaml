@@ -81,9 +81,9 @@ deployItems:
                 storage:
                   className: gardener.cloud-fast
                   capacity: 80Gi
-            {{- if .imports.imageVectorOverwrite }}
+            {{- if .imports.lssComponentDescriptor }}
             imageVectorOverwrite: |
-              {{- toYaml .imports.imageVectorOverwrite | nindent 16 }}
+              {{- generateImageOverwrite .cd .imports.lssComponentDescriptor | toYaml | nindent 16 }}
             {{- end }}
 
     - policy: manage
