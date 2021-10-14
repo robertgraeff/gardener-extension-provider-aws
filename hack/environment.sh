@@ -8,7 +8,7 @@ set -e
 
 get_cd_registry () {
   # for creating and uploading a component descriptor just insert the location to your registry e.g. eu.gcr.io/sap-se-gcr-k8s-private/cnudie/gardener/development
-  registry=""
+  registry="eu.gcr.io/sap-se-gcr-k8s-private/cnudie/gardener/development"
 
   if [ -n "$registry" ]; then
     echo $registry

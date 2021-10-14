@@ -38,10 +38,35 @@ spec:
       - name: cluster
         target: "#cluster"
 
-  importDataMappings:
-    cloudProfile: {}
+    componentDescriptors:
+      - name: lssComponentDescriptor
+        list:
+        - ref:
+            componentName: github.wdf.sap.corp/kubernetes/landscape-setup
+            version: 0.2510.0
+            repositoryContext:
+              type: ociRegistry
+              baseUrl: eu.gcr.io/sap-se-gcr-k8s-private/cnudie/gardener/development
 
-    kubernetesVersions: []
+  importDataMappings:
+    cloudProfile:
+      machineImages:
+        - name: test1
+          versions:
+            - version: v1
+              region: r1
+            - version: v2
+              region: r2
+        - name: test2
+          versions:
+            - version: v3
+              region: r3
+
+    kubernetesVersions:
+      - classification: preview
+        version: 1.22.2
+      - classification: supported
+        version: 1.21.5
 
     controllerRegistration:
       concurrentSyncs: 50
@@ -60,9 +85,6 @@ spec:
             memory: 256Mi
         updatePolicy:
           updateMode: "Auto"
-
-    imageVectorOverwrite:
-      images: []
 EOF
 
 echo "Installation stored at ${INSTALLATION_PATH}"

@@ -59,6 +59,22 @@ access:
   type: ociRegistry
   imageReference: ${IMAGE_REGISTRY}/admission-aws:${EFFECTIVE_VERSION}
 ...
+---
+type: ociImage
+name: alpine
+relation: local
+access:
+  type: ociRegistry
+  imageReference: alpine:3.12.1
+...
+---
+type: ociImage
+name: pause
+relation: local
+access:
+  type: ociRegistry
+  imageReference: k8s.gcr.io/pause:3.1
+...
 EOF
 
 echo "> Adding image resources to ${CA_PATH}"
