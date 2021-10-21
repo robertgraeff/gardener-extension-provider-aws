@@ -1,0 +1,17 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: InstallationTemplate
+
+name: machine-images
+
+blueprint:
+  ref: cd://components/machine-images/resources/machine-images
+
+imports:
+  data:
+    - name: machine-image-imports-ls
+      dataRef: dataWhichHasToBePreprocessed
+
+exports:
+  data:
+    - name: machine-images
+      dataRef: machine-images

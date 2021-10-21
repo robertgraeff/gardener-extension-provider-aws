@@ -1,0 +1,21 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: InstallationTemplate
+
+name: preprocess-data
+
+blueprint:
+  ref: cd://components/generic-executor/resources/blueprint
+
+imports:
+  data:
+    - name: generic-executor-import
+      dataRef: dataWhichHasToBePreprocessed
+
+importDataMapping:
+  executable: cd://resources/aws-data-processor
+
+exports:
+  data:
+    - name: generic-executor-export
+      dataRef: dataProcessed
+

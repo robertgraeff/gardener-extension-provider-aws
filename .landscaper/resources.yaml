@@ -1,10 +1,20 @@
 ---
 type: blueprint
-name: blueprint
+name: aws-extension-blueprint
 relation: local
 input: 
   type: dir
-  path: ./blueprint
+  path: .awsextensionblueprint/blueprint
+  mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
+  compress: true
+...
+---
+type: blueprint
+name: aggregated-blueprint
+relation: local
+input:
+  type: dir
+  path: .aggregatedblueprint/blueprint
   mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
   compress: true
 ...
@@ -17,4 +27,14 @@ input:
   path: ../charts/gardener-extension-provider-aws
   compress: true
   preserveDir: true
+...
+---
+type: executable
+name: aws-data-processor
+relation: local
+input:
+  type: dir
+  path: .somepath
+  mediaType: somemediatype
+  compress: true
 ...

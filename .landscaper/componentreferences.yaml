@@ -1,0 +1,11 @@
+---
+componentName: github.com/gardener/machine-images
+name: machine-images
+version: v0.1.1
+...
+
+---
+componentName: github.com/gardener/machine-images
+name: generic-executor
+version: v0.1.1
+...

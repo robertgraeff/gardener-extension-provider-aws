@@ -1,0 +1,16 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: InstallationTemplate
+
+name: machine-images
+
+blueprint:
+  ref: cd://resources/aws-extension-blueprint
+
+imports:
+  data:
+    - name: machine-image-imports-ls
+      dataRef: machine-image-imports-ls
+
+    - name: processedData
+        dataRef: processedData
+

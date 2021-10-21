@@ -1,0 +1,71 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: Blueprint
+
+imports:
+- name: cluster
+  required: true
+  targetType: landscaper.gardener.cloud/kubernetes-cluster
+
+- name: lssComponentDescriptor
+  type: componentDescriptorList
+
+- name: machine-image-imports-ls
+  schema:
+    type: object
+
+# data from landscape-*-setup/export/kubernetes/KUBERNETES_VERSIONS.yaml
+# versions of item with name 'aws'
+- name: kubernetesVersions
+  schema:
+    type: array
+
+# data from landscape-*-setup/landscape.yaml section gardener-extension-provider-aws.values
+- name: controllerRegistration
+  schema:
+    type: object
+    properties:
+      concurrentSyncs:
+        type: integer
+      controllerResources:
+        type: array
+        items:
+          type: object
+          properties:
+            kind:
+              type: string
+            type:
+              type: string
+      resources:
+        type: object
+        properties:
+          requests:
+            type: object
+            properties:
+              cpu:
+                type: string
+              memory:
+                type: string
+          limits:
+            type: object
+            properties:
+              cpu:
+                type: string
+              memory:
+                type: string
+      vpa:
+        scheme:
+          type: object
+
+- name: dataWhichHasToBePreprocessed
+  schema:
+    type:object
+
+exports: []
+
+exportExecutions: []
+
+subinstallations: [
+  - file: /subinst-preprocess-data.yaml
+  - file: /subinst-machine-images.yaml
+  - file: /subinst-aws-extension.yaml
+]
