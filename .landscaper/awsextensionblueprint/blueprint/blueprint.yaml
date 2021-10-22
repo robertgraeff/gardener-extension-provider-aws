@@ -8,6 +8,7 @@ imports:
 
 - name: lssComponentDescriptor
   type: componentDescriptorList
+  required: false
 
 - name: cloudProfile
   schema:
@@ -15,7 +16,9 @@ imports:
     properties:
       # it is assumed that the disable_machine_images have already been removed
       machineImages:
-        type: array
+        type: data
+        schema:
+          $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
       regions:
         type: array
         items:
@@ -26,48 +29,14 @@ imports:
             zones:
               type: array
 
-# data from landscape-*-setup/export/kubernetes/KUBERNETES_VERSIONS.yaml
-# versions of item with name 'aws'
 - name: kubernetesVersions
   schema:
     type: array
 
-# data from landscape-*-setup/landscape.yaml section gardener-extension-provider-aws.values
 - name: controllerRegistration
+  type: data
   schema:
-    type: object
-    properties:
-      concurrentSyncs:
-        type: integer
-      controllerResources:
-        type: array
-        items:
-          type: object
-          properties:
-            kind:
-              type: string
-            type:
-              type: string
-      resources:
-        type: object
-        properties:
-          requests:
-            type: object
-            properties:
-              cpu:
-                type: string
-              memory:
-                type: string
-          limits:
-            type: object
-            properties:
-              cpu:
-                type: string
-              memory:
-                type: string
-      vpa:
-        scheme:
-          type: object
+    $ref: "cd://resources/controller-registration-schema"
 
 exports: []
 

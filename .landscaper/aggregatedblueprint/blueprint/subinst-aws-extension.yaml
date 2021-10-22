@@ -1,16 +1,38 @@
-apiVersion: landscaper.gardener.cloud/v1alpha1
-kind: InstallationTemplate
+subinstallations:
+- apiVersion: landscaper.gardener.cloud/v1alpha1
+  kind: InstallationTemplate
 
-name: machine-images
+  name: aws-extension
 
-blueprint:
-  ref: cd://resources/aws-extension-blueprint
+  blueprint:
+    ref: cd://resources/aws-extension-blueprint
 
-imports:
-  data:
-    - name: machine-image-imports-ls
-      dataRef: machine-image-imports-ls
+  imports:
+    targets:
+      - name: cluster
+        target: cluster
 
-    - name: processedData
-        dataRef: processedData
+    data:
+      - name: parentCloudProfile
+        dataRef: cloudProfile
+
+      - name: siblingMachineImages
+        dataRef: machineImages
+
+      - name: kubernetesVersions
+        list: kubernetesVersions
+
+      - name: controllerRegistration
+        list: controllerRegistration
+
+    {{- if .imports.lssComponentDescriptor }}
+    componentDescriptors:
+      - name: lssComponentDescriptor
+        list: lssComponentDescriptor
+    {{- end }}
+
+  importDataMappings:
+    cloudProfile:
+      machineImages: (( siblingMachineImages ))
+      regions: (( parentCloudProfile.regions ))
 

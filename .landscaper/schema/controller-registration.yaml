@@ -1,0 +1,36 @@
+"$schema": "https://json-schema.org/draft/2020-12/schema"
+"$id": "github.com/gardener/landscaper-utils/machineimages/schemata/controller-registration"
+"title": "Controller Registration"
+type: object
+  properties:
+    concurrentSyncs:
+      type: integer
+    controllerResources:
+      type: array
+      items:
+        type: object
+        properties:
+          kind:
+            type: string
+          type:
+            type: string
+    resources:
+      type: object
+      properties:
+        requests:
+          type: object
+          properties:
+            cpu:
+              type: string
+            memory:
+              type: string
+        limits:
+          type: object
+          properties:
+            cpu:
+              type: string
+            memory:
+              type: string
+    vpa:
+      scheme:
+        type: object

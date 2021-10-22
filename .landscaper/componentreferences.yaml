@@ -1,11 +1,11 @@
 ---
-componentName: github.com/gardener/machine-images
+componentName: github.com/gardener/landscaper-utils/machine-images
 name: machine-images
 version: v0.1.1
 ...
 
 ---
-componentName: github.com/gardener/machine-images
+componentName: github.com/gardener/landscaper-utils/generic-executor
 name: generic-executor
 version: v0.1.1
 ...

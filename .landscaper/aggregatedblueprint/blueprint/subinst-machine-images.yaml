@@ -1,17 +1,28 @@
-apiVersion: landscaper.gardener.cloud/v1alpha1
-kind: InstallationTemplate
+subinstallations:
+- apiVersion: landscaper.gardener.cloud/v1alpha1
+  kind: InstallationTemplate
 
-name: machine-images
+  name: machine-images
 
-blueprint:
-  ref: cd://components/machine-images/resources/machine-images
+  blueprint:
+    ref: cd://components/machine-images/resources/machine-images
 
-imports:
-  data:
-    - name: machine-image-imports-ls
-      dataRef: dataWhichHasToBePreprocessed
+  imports:
+    data:
+    - name: importCloudProfile
+      dataRef: cloudProfile
 
-exports:
-  data:
-    - name: machine-images
-      dataRef: machine-images
+  importDataMappings:
+    machineImages: (( importCloudProfile.machineImages ))
+    machineImagesLs: (( importCloudProfile.machineImagesLs ))
+    {{- $localimages := getResource .cd "name" "os-image-config" }}
+    machineImagesProvider: {{ resolve ( $localimages.access ) | toYaml }}
+    machineImagesProviderLs: (( importCloudProfile.machineImagesProviderLs ))
+    disableMachineImages: (( importCloudProfile.disableMachineImages ))
+    includeFilters: (( importCloudProfile.includeFilters ))
+    excludeFilters: (( importCloudProfile.excludeFilters ))
+
+  exports:
+    data:
+      - name: machineImages
+        dataRef: machineImages

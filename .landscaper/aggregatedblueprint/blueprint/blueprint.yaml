@@ -8,10 +8,45 @@ imports:
 
 - name: lssComponentDescriptor
   type: componentDescriptorList
+  required: false
 
-- name: machine-image-imports-ls
+- name: cloudProfile
   schema:
     type: object
+    properties:
+      machineImages:
+        type: data
+        schema:
+          $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
+      machineImagesLs:
+        type: data
+        schema:
+          $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
+      machineImagesProviderLs:
+        type: data
+        schema:
+          $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
+      disableMachineImages:
+        type: array
+        items:
+          type: string
+      includeFilters:
+        type: array
+        items:
+          type: string
+      excludeFilters:
+        type: array
+        items:
+          type: string
+      regions:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            zones:
+              type: array
 
 # data from landscape-*-setup/export/kubernetes/KUBERNETES_VERSIONS.yaml
 # versions of item with name 'aws'
@@ -21,40 +56,9 @@ imports:
 
 # data from landscape-*-setup/landscape.yaml section gardener-extension-provider-aws.values
 - name: controllerRegistration
+  type: data
   schema:
-    type: object
-    properties:
-      concurrentSyncs:
-        type: integer
-      controllerResources:
-        type: array
-        items:
-          type: object
-          properties:
-            kind:
-              type: string
-            type:
-              type: string
-      resources:
-        type: object
-        properties:
-          requests:
-            type: object
-            properties:
-              cpu:
-                type: string
-              memory:
-                type: string
-          limits:
-            type: object
-            properties:
-              cpu:
-                type: string
-              memory:
-                type: string
-      vpa:
-        scheme:
-          type: object
+    $ref: "cd://resources/controller-registration-schema"
 
 - name: dataWhichHasToBePreprocessed
   schema:
@@ -64,8 +68,13 @@ exports: []
 
 exportExecutions: []
 
-subinstallations: [
+subinstallations:
   - file: /subinst-preprocess-data.yaml
-  - file: /subinst-machine-images.yaml
-  - file: /subinst-aws-extension.yaml
-]
+
+subinstallationExecutions:
+- name: subinst-machine-images
+  type: GoTemplate
+  file: /subinst-machine-images.yaml
+- name: subinst-aws-extension
+  type: GoTemplate
+  file: /subinst-aws-extension.yaml

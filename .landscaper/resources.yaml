@@ -18,6 +18,7 @@ input:
   mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
   compress: true
 ...
+
 ---
 type: helm.io/chart
 name: gardener-extension-provider-aws-chart
@@ -28,6 +29,26 @@ input:
   compress: true
   preserveDir: true
 ...
+
+---
+type: yaml
+name: os-image-config
+relation: local
+input:
+  type: dir
+  path: ./resources/os_image_config.yaml
+  compress: true
+...
+
+---
+name: controller-registration-schema
+type: landscaper.gardener.cloud/jsonschema
+relation: local
+input:
+  type: file
+  path: ./schemata/contoller-registration.yaml
+...
+
 ---
 type: executable
 name: aws-data-processor
@@ -35,6 +56,5 @@ relation: local
 input:
   type: dir
   path: .somepath
-  mediaType: somemediatype
   compress: true
 ...
