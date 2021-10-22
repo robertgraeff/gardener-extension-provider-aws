@@ -19,9 +19,6 @@ subinstallations:
       - name: siblingMachineImages
         dataRef: machineImages
 
-      - name: kubernetesVersions
-        list: kubernetesVersions
-
       - name: controllerRegistration
         list: controllerRegistration
 
@@ -35,4 +32,4 @@ subinstallations:
     cloudProfile:
       machineImages: (( siblingMachineImages ))
       regions: (( parentCloudProfile.regions ))
-
+      kubernetesVersions: (( parentCloudProfile.kubernetesVersions ))

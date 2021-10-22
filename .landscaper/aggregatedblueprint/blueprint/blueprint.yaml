@@ -14,6 +14,10 @@ imports:
   schema:
     type: object
     properties:
+      # data from landscape-*-setup/export/kubernetes/KUBERNETES_VERSIONS.yaml
+      # versions of item with name 'aws'
+      kubernetesVersions:
+        type: array
       machineImages:
         type: data
         schema:
@@ -48,12 +52,6 @@ imports:
             zones:
               type: array
 
-# data from landscape-*-setup/export/kubernetes/KUBERNETES_VERSIONS.yaml
-# versions of item with name 'aws'
-- name: kubernetesVersions
-  schema:
-    type: array
-
 # data from landscape-*-setup/landscape.yaml section gardener-extension-provider-aws.values
 - name: controllerRegistration
   type: data
@@ -61,15 +59,12 @@ imports:
     $ref: "cd://resources/controller-registration-schema"
 
 - name: dataWhichHasToBePreprocessed
-  schema:
-    type:object
+  type: string
 
 exports: []
 
 exportExecutions: []
 
-subinstallations:
-  - file: /subinst-preprocess-data.yaml
 
 subinstallationExecutions:
 - name: subinst-machine-images
@@ -78,3 +73,6 @@ subinstallationExecutions:
 - name: subinst-aws-extension
   type: GoTemplate
   file: /subinst-aws-extension.yaml
+- name: subinst-preprocess-data
+  type: GoTemplate
+  file: /subinst-preprocess-data.yaml

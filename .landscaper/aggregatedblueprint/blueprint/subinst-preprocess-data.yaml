@@ -1,21 +1,28 @@
-apiVersion: landscaper.gardener.cloud/v1alpha1
-kind: InstallationTemplate
+{{- if .imports.dataWhichHasToBePreprocessed }}
+subinstallations:
+- apiVersion: landscaper.gardener.cloud/v1alpha1
+  kind: InstallationTemplate
 
-name: preprocess-data
+  name: preprocess-data
 
-blueprint:
-  ref: cd://components/generic-executor/resources/blueprint
+  blueprint:
+    ref: cd://components/generic-executor/resources/blueprint
 
-imports:
-  data:
-    - name: generic-executor-import
-      dataRef: dataWhichHasToBePreprocessed
+  imports:
+    data:
+      - name: generic-executor-import
+        dataRef: dataWhichHasToBePreprocessed
 
-importDataMapping:
-  executable: cd://resources/aws-data-processor
+  importDataMapping:
+    {{ - $code := getResource .cd "name" "aws-data-processor" }}
+    executable: {{ resolve ( $code.access ) | b64enc }}
 
-exports:
-  data:
-    - name: generic-executor-export
-      dataRef: dataProcessed
+  exports:
+    data:
+      - name: generic-executor-export
+        dataRef: dataProcessed
+{{- else }}
+subinstallations: []
+{{- end }}
+
 

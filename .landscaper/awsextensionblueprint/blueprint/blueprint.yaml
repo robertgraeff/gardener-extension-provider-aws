@@ -14,7 +14,8 @@ imports:
   schema:
     type: object
     properties:
-      # it is assumed that the disable_machine_images have already been removed
+      kubernetesVersions:
+        type: array
       machineImages:
         type: data
         schema:
@@ -28,10 +29,6 @@ imports:
               type: string
             zones:
               type: array
-
-- name: kubernetesVersions
-  schema:
-    type: array
 
 - name: controllerRegistration
   type: data

@@ -41,6 +41,16 @@ input:
 ...
 
 ---
+type: yaml
+name: machine-types
+relation: local
+input:
+  type: file
+  path: ./resources/machine_types.yaml
+  compress: true
+...
+
+---
 name: controller-registration-schema
 type: landscaper.gardener.cloud/jsonschema
 relation: local
@@ -54,7 +64,7 @@ type: executable
 name: aws-data-processor
 relation: local
 input:
-  type: dir
-  path: .somepath
+  type: file
+  path: ./resources/executable.exe
   compress: true
 ...
