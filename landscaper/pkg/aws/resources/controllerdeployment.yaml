@@ -1,0 +1,61 @@
+apiVersion: core.gardener.cloud/v1beta1
+kind: ControllerDeployment
+metadata:
+  name: provider-aws
+type: helm
+providerConfig:
+
+# chart: the helm chart "gardener-extension-provider-aws" as base64 string.
+#        Resource name in the component descriptor: "gardener-extension-provider-aws-chart"
+
+  values:
+
+#   image:
+#     {{- $image := getResource .cd "name" "gardener-extension-provider-aws" }}
+#     repository: {{ ociRefRepo ( $image.access.imageReference ) }}
+#     tag: {{ ociRefVersion ( $image.access.imageReference ) }}
+
+#   images:
+#     alpine: {{ (getResource .cd "name" "alpine").access.imageReference }}
+#     pause: {{ (getResource .cd "name" "pause").access.imageReference }}
+
+    replicaCount: 3
+
+    # Replaced by .imports.controllerDeployment.resources if provided
+    resources:
+      requests:
+        cpu: "20m"
+        memory: "64Mi"
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+
+    # Replaced by .imports.controllerDeployment.vpa if provided
+    vpa:
+      enabled: true
+      updatePolicy:
+        updateMode: "Auto"
+
+    # The number of concurrentSyncs will be replaced by .imports.controllerDeployment.concurrentSyncs if provided
+    controllers:
+      backupentry:
+        concurrentSyncs: 20
+      controlplane:
+        concurrentSyncs: 20
+      dnsrecord:
+        concurrentSyncs: 20
+      healthcheck:
+        concurrentSyncs: 20
+      infrastructure:
+        concurrentSyncs: 20
+      worker:
+        concurrentSyncs: 20
+
+    config:
+      etcd:
+        storage:
+          className: gardener.cloud-fast
+          capacity: 80Gi
+
+    #imageVectorOverwrite: |
+    # from .imports.imageVectorOverwrite if provided

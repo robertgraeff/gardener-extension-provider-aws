@@ -15,6 +15,7 @@
 EXTENSION_PREFIX            := gardener-extension
 NAME                        := provider-aws
 ADMISSION_NAME              := admission-aws
+DEPLOYER_NAME               := provider-aws/deployer
 REGISTRY                    := eu.gcr.io/gardener-project/gardener
 IMAGE_PREFIX                := $(REGISTRY)/extensions
 REPO_ROOT                   := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -23,6 +24,7 @@ VERSION                     := $(shell cat "$(REPO_ROOT)/VERSION")
 LD_FLAGS                    := "-w -X github.com/gardener/$(EXTENSION_PREFIX)-$(NAME)/pkg/version.Version=$(IMAGE_TAG)"
 LEADER_ELECTION             := false
 IGNORE_OPERATION_ANNOTATION := true
+EFFECTIVE_VERSION           := $(VERSION)-$(shell git rev-parse HEAD)
 
 WEBHOOK_CONFIG_PORT	:= 8443
 WEBHOOK_CONFIG_MODE	:= url
@@ -170,3 +172,36 @@ integration-test-dnsrecord:
 		--kubeconfig=${KUBECONFIG} \
 		--access-key-id='$(shell cat $(ACCESS_KEY_ID_FILE))' \
 		--secret-access-key='$(shell cat $(SECRET_ACCESS_KEY_FILE))'
+
+#############################################
+# Rules for component descriptors dev setup #
+#############################################
+
+.PHONY: deployer-install
+deployer-install:
+	@cd $(REPO_ROOT)/landscaper && make deployer-install
+
+.PHONY: deployer-docker-images
+deployer-docker-images:
+	@echo "Building docker images for version $(EFFECTIVE_VERSION) for registry $(IMAGE_PREFIX)"
+	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(NAME):$(EFFECTIVE_VERSION) -f Dockerfile -m 6g --target $(EXTENSION_PREFIX)-$(NAME) .
+	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(ADMISSION_NAME):$(EFFECTIVE_VERSION) -f Dockerfile -m 6g --target $(EXTENSION_PREFIX)-$(ADMISSION_NAME) .
+	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(DEPLOYER_NAME):$(EFFECTIVE_VERSION) -f landscaper/Dockerfile -m 6g --target "provider-aws-deployer" ./landscaper
+
+.PHONY: deployer-docker-push
+deployer-docker-push:
+	@echo "Pushing docker images for version $(EFFECTIVE_VERSION) to registry $(IMAGE_PREFIX)"
+	@if ! docker images $(IMAGE_PREFIX)/$(NAME) | awk '{ print $$2 }' | grep -q -F $(EFFECTIVE_VERSION); then echo "$(IMAGE_PREFIX)/$(NAME) version $(EFFECTIVE_VERSION) is not yet built. Please run 'make cnudie-docker-images'"; false; fi
+	@docker push $(IMAGE_PREFIX)/$(NAME):$(EFFECTIVE_VERSION)
+	@if ! docker images $(IMAGE_PREFIX)/$(ADMISSION_NAME) | awk '{ print $$2 }' | grep -q -F $(EFFECTIVE_VERSION); then echo "$(IMAGE_PREFIX)/$(ADMISSION_NAME) version $(EFFECTIVE_VERSION) is not yet built. Please run 'make cnudie-docker-images'"; false; fi
+	@docker push $(IMAGE_PREFIX)/$(ADMISSION_NAME):$(EFFECTIVE_VERSION)
+	@if ! docker images $(IMAGE_PREFIX)/$(DEPLOYER_NAME) | awk '{ print $$2 }' | grep -q -F $(EFFECTIVE_VERSION); then echo "$(IMAGE_PREFIX)/$(DEPLOYER_NAME) version $(EFFECTIVE_VERSION) is not yet built. Please run 'make cnudie-docker-images'"; false; fi
+	@docker push $(IMAGE_PREFIX)/$(DEPLOYER_NAME):$(EFFECTIVE_VERSION)
+
+.PHONY: cnudie-cd-build-push
+cnudie-cd-build-push:
+	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/generate-cd-personal.sh
+
+.PHONY: cnudie-create-installation
+cnudie-create-installation:
+	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/create-installation-personal.sh
