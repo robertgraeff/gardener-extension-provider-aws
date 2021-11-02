@@ -13,5 +13,5 @@ echo "> Building component provider-aws"
 CA_PATH="$(mktemp -d)"
 mv "$COMPONENT_DESCRIPTOR_PATH" "$CA_PATH/component-descriptor.yaml"
 component-cli ca "${CA_PATH}" "${CTF_PATH}" \
-    -r  "$SOURCE_PATH"/.landscaper/resources.yaml \
+    -r  "$SOURCE_PATH"/landscaper/resources.yaml \
     VERSION=${EFFECTIVE_VERSION}

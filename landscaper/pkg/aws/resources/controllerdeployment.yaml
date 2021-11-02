@@ -1,0 +1,64 @@
+apiVersion: core.gardener.cloud/v1beta1
+kind: ControllerDeployment
+metadata:
+  name: provider-aws
+type: helm
+providerConfig:
+#  {{- $chart := getResource .cd "name" "gardener-extension-provider-aws-chart" }}
+#  chart: {{ resolve ( $chart.access ) | toString | b64enc }}
+
+  values:
+#    image:
+#      {{- $image := getResource .cd "name" "gardener-extension-provider-aws" }}
+#      repository: {{ ociRefRepo ( $image.access.imageReference ) }}
+#      tag: {{ ociRefVersion ( $image.access.imageReference ) }}
+
+#    images:
+#      alpine: {{ (getResource .cd "name" "alpine").access.imageReference }}
+#      pause: {{ (getResource .cd "name" "pause").access.imageReference }}
+
+    replicaCount: 3
+
+    # Replaced by .imports.controllerRegistration.resources if provided
+    resources:
+      requests:
+        cpu: "20m"
+        memory: "64Mi"
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+
+    # Replaced by .imports.controllerRegistration.vpa if provided
+    vpa:
+      enabled: true
+      updatePolicy:
+        updateMode: "Auto"
+
+    controllers:
+      backupentry:
+        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
+        concurrentSyncs: 20
+      controlplane:
+        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
+        concurrentSyncs: 20
+      dnsrecord:
+        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
+        concurrentSyncs: 20
+      healthcheck:
+        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
+        concurrentSyncs: 20
+      infrastructure:
+        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
+        concurrentSyncs: 20
+      worker:
+        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
+        concurrentSyncs: 20
+
+    config:
+      etcd:
+        storage:
+          className: gardener.cloud-fast
+          capacity: 80Gi
+
+    #imageVectorOverwrite: |
+    # from .imports.imageVectorOverwrite if provided

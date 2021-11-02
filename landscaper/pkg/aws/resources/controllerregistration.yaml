@@ -1,0 +1,23 @@
+apiVersion: core.gardener.cloud/v1beta1
+kind: ControllerRegistration
+metadata:
+  name: provider-aws
+spec:
+  # The resources section will be replaced by .imports.controllerRegistration.controllerResources if provided
+  resources:
+  - kind: BackupBucket
+    type: aws
+  - kind: BackupEntry
+    type: aws
+  - kind: ControlPlane
+    type: aws
+  - kind: DNSRecord
+    type: aws-route53
+  - kind: Infrastructure
+    type: aws
+  - kind: Worker
+    type: aws
+
+  deployment:
+    deploymentRefs:
+      - name: provider-aws
