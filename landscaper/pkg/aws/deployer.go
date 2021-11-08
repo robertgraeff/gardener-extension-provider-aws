@@ -57,7 +57,7 @@ func Process(ctx context.Context, o *utils.Options) error {
 }
 
 func deploy(ctx context.Context, log logr.Logger, clt client.Client, imports *Imports) error {
-	controllerDeployment, err := constructControllerDeployment()
+	controllerDeployment, err := constructControllerDeployment(imports)
 	if err != nil {
 		return err
 	}
