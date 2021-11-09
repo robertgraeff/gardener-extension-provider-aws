@@ -87,6 +87,7 @@ github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578/go.mod h1:uGdko
 github.com/agnivade/levenshtein v1.0.1/go.mod h1:CURSv5d9Uaml+FovSIICkLbAUZ9S4RqaHDIsdSBg7lM=
 github.com/ahmetb/gen-crd-api-reference-docs v0.1.5/go.mod h1:P/XzJ+c2+khJKNKABcm2biRwk2QAuwbLf8DlXuaL7WM=
 github.com/ahmetb/gen-crd-api-reference-docs v0.2.0/go.mod h1:P/XzJ+c2+khJKNKABcm2biRwk2QAuwbLf8DlXuaL7WM=
+github.com/ahmetb/gen-crd-api-reference-docs v0.3.0/go.mod h1:TdjdkYhlOifCQWPs1UdTma97kQQMozf5h26hTuG70u8=
 github.com/ajstarks/svgo v0.0.0-20180226025133-644b8db467af/go.mod h1:K08gAheRH3/J6wwsYMMT4xOr94bZjxIelGM0+d/wbFw=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
@@ -261,10 +262,16 @@ github.com/gardener/gardener-resource-manager/api v0.25.0/go.mod h1:+9fZvF83k8f8
 github.com/gardener/hvpa-controller v0.0.0-20191014062307-fad3bdf06a25/go.mod h1:yj7YJ6ijo4adcpXQKutPFZfQuKLdM5UMZZUlpbM3vig=
 github.com/gardener/hvpa-controller v0.2.5/go.mod h1:rjsb3BPKJFMluudZ8/bhCCDQfFCF/0Um+rzXQI/MmfI=
 github.com/gardener/hvpa-controller v0.3.1/go.mod h1:rjsb3BPKJFMluudZ8/bhCCDQfFCF/0Um+rzXQI/MmfI=
+github.com/gardener/landscaper-utils v0.1.0 h1:fGOyjZcgAjoZLqEqz0jl0Dhl8yeGdwtqziJ3lWfpMK8=
+github.com/gardener/landscaper-utils v0.1.0/go.mod h1:Hppj4E5NwCW3zpGJdhXfWzk8MrVA6+9fPOy5ZcEw8z0=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211104151042-e8eeda1247ec h1:E3iNA++VlZe4A33r+9Pag8rV+lWAn85nfkDLHnRnInQ=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211104151042-e8eeda1247ec/go.mod h1:+W1dR2EppgQdRxUQKHyZJTMGSi8onPR3FHfGkvzEmvU=
+github.com/gardener/landscaper-utils/deployutils v0.0.0-20211109085447-6f2d6c915d44 h1:7moIl49DugyAW/vvpcq2xW3iYu+JX38RvhG+9dFKC4I=
+github.com/gardener/landscaper-utils/deployutils v0.0.0-20211109085447-6f2d6c915d44/go.mod h1:+W1dR2EppgQdRxUQKHyZJTMGSi8onPR3FHfGkvzEmvU=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211104151042-e8eeda1247ec h1:rHn+OnkP2bq74YT/KRs4ea8k8/aigQf1f7JdUYVWR90=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211104151042-e8eeda1247ec/go.mod h1:3gI7Ttvb+8suwKKCVYChLj9pv5isvK1JSEzTTfsvWJs=
+github.com/gardener/landscaper-utils/machineimages v0.0.0-20211109085447-6f2d6c915d44 h1:FBnNaf+mFrmI+1PJHAhn6EMrx4TBTbY7fx3ReLE+gCg=
+github.com/gardener/landscaper-utils/machineimages v0.0.0-20211109085447-6f2d6c915d44/go.mod h1:3gI7Ttvb+8suwKKCVYChLj9pv5isvK1JSEzTTfsvWJs=
 github.com/gardener/landscaper/apis v0.7.0/go.mod h1:++MW27PlSnbWM4AJipikw62RSprxO5TKVxZ8nh0e4Yw=
 github.com/gardener/landscaper/apis v0.15.1 h1:jhpMI4mfVvZTcdmRDJiDoYJ2m6fBRoHptvGoE44UBYo=
 github.com/gardener/landscaper/apis v0.15.1/go.mod h1:XFDwxQgoSR0qHv8WzYuT7MC4yEVR6vJ/PWiQB4B0cfA=
@@ -658,6 +665,7 @@ github.com/onsi/ginkgo v1.16.1/go.mod h1:CObGmKUOKaSC0RjmoAK7tKyn4Azo5P2IWuoMnvw
 github.com/onsi/ginkgo v1.16.2/go.mod h1:CObGmKUOKaSC0RjmoAK7tKyn4Azo5P2IWuoMnvwxz1E=
 github.com/onsi/ginkgo v1.16.4 h1:29JGrr5oVBm5ulCWet69zQkzWipVXIol6ygQUe/EzNc=
 github.com/onsi/ginkgo v1.16.4/go.mod h1:dX+/inL/fNMqNlz0e9LfyB9TswhZpCVdJM/Z6Vvnwo0=
+github.com/onsi/ginkgo v1.16.5/go.mod h1:+E8gABHa3K6zRBolWtd+ROzc/U5bkGt0FwiG042wbpU=
 github.com/onsi/gomega v0.0.0-20170829124025-dcabb60a477c/go.mod h1:C1qb7wdrVGGVU+Z6iS04AVkA3Q65CEZX59MT0QO5uiA=
 github.com/onsi/gomega v1.3.0/go.mod h1:C1qb7wdrVGGVU+Z6iS04AVkA3Q65CEZX59MT0QO5uiA=
 github.com/onsi/gomega v1.4.2/go.mod h1:ex+gbHU/CVuBBDIJjb2X0qEXbFg53c61hWP/1CpauHY=
@@ -1554,6 +1562,7 @@ k8s.io/gengo v0.0.0-20200114144118-36b2048a9120/go.mod h1:ezvh/TsK7cY6rbqRK0oQQ8
 k8s.io/gengo v0.0.0-20200413195148-3a45101e95ac/go.mod h1:ezvh/TsK7cY6rbqRK0oQQ8IAqLxYwwyPxAX1Pzy0ii0=
 k8s.io/gengo v0.0.0-20200428234225-8167cfdcfc14/go.mod h1:ezvh/TsK7cY6rbqRK0oQQ8IAqLxYwwyPxAX1Pzy0ii0=
 k8s.io/gengo v0.0.0-20201113003025-83324d819ded/go.mod h1:FiNAH4ZV3gBg2Kwh89tzAEV2be7d5xI0vBa/VySYy3E=
+k8s.io/gengo v0.0.0-20201203183100-97869a43a9d9/go.mod h1:FiNAH4ZV3gBg2Kwh89tzAEV2be7d5xI0vBa/VySYy3E=
 k8s.io/gengo v0.0.0-20201214224949-b6c5ce23f027/go.mod h1:FiNAH4ZV3gBg2Kwh89tzAEV2be7d5xI0vBa/VySYy3E=
 k8s.io/helm v2.14.2+incompatible/go.mod h1:LZzlS4LQBHfciFOurYBFkCMTaZ0D1l+p0teMg7TSULI=
 k8s.io/helm v2.16.0+incompatible/go.mod h1:LZzlS4LQBHfciFOurYBFkCMTaZ0D1l+p0teMg7TSULI=

@@ -1,0 +1,372 @@
+component:
+  componentReferences:
+  - componentName: github.com/gardener/terraformer
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v2.10.0
+    labels:
+    - name: imagevector.gardener.cloud/images
+      value:
+        images:
+        - name: terraformer
+          repository: eu.gcr.io/gardener-project/gardener/terraformer-aws
+          resourceId:
+            name: terraformer
+          sourceRepository: github.com/gardener/terraformer
+          tag: v2.10.0
+    name: terraformer
+    version: v2.10.0
+  - componentName: github.com/gardener/machine-controller-manager
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v0.40.0
+    labels:
+    - name: imagevector.gardener.cloud/images
+      value:
+        images:
+        - name: machine-controller-manager
+          repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager
+          resourceId:
+            name: machine-controller-manager
+          sourceRepository: github.com/gardener/machine-controller-manager
+          tag: v0.40.0
+    name: machine-controller-manager
+    version: v0.40.0
+  - componentName: github.com/gardener/machine-controller-manager-provider-aws
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v0.8.0
+    labels:
+    - name: imagevector.gardener.cloud/images
+      value:
+        images:
+        - name: machine-controller-manager-provider-aws
+          repository: eu.gcr.io/gardener-project/gardener/machine-controller-manager-provider-aws
+          resourceId:
+            name: machine-controller-manager-provider-aws
+          sourceRepository: github.com/gardener/machine-controller-manager-provider-aws
+          tag: v0.8.0
+    name: machine-controller-manager-provider-aws
+    version: v0.8.0
+  - componentName: github.com/gardener/aws-lb-readvertiser
+    extraIdentity:
+      imagevector-gardener-cloud+tag: 0.7.0
+    labels:
+    - name: imagevector.gardener.cloud/images
+      value:
+        images:
+        - name: aws-lb-readvertiser
+          repository: eu.gcr.io/gardener-project/gardener/aws-lb-readvertiser
+          resourceId:
+            name: aws-lb-readvertiser
+          sourceRepository: github.com/gardener/aws-lb-readvertiser
+          tag: 0.7.0
+    name: aws-lb-readvertiser
+    version: 0.7.0
+  labels:
+  - name: imagevector.gardener.cloud/images
+    value:
+      images:
+      - name: cloud-controller-manager
+        repository: k8s.gcr.io/hyperkube
+        sourceRepository: github.com/kubernetes/kubernetes
+        targetVersion: < 1.17
+  name: github.com/gardener/gardener-extension-provider-aws
+  provider: internal
+  repositoryContexts:
+  - baseUrl: eu.gcr.io/sap-se-gcr-k8s-private/cnudie/gardener/development
+    componentNameMapping: urlPath
+    type: ociRegistry
+  resources:
+  - access:
+      imageReference: eu.gcr.io/gardener-project/gardener/extensions/provider-aws:v1.29.0
+      type: ociRegistry
+    name: gardener-extension-provider-aws
+    relation: local
+    type: ociImage
+    version: v1.29.0
+  - access:
+      imageReference: eu.gcr.io/gardener-project/gardener/extensions/admission-aws:v1.29.0
+      type: ociRegistry
+    name: gardener-extension-admission-aws
+    relation: local
+    type: ociImage
+    version: v1.29.0
+  - access:
+      imageReference: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws:v1.17.17
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.17.17
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: cloud-controller-manager
+    - name: imagevector.gardener.cloud/repository
+      value: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/gardener/cloud-provider-aws
+    - name: imagevector.gardener.cloud/target-version
+      value: 1.17.x
+    name: cloud-controller-manager
+    relation: external
+    type: ociImage
+    version: v1.17.17
+  - access:
+      imageReference: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws:v1.18.20
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.18.20
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: cloud-controller-manager
+    - name: imagevector.gardener.cloud/repository
+      value: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/gardener/cloud-provider-aws
+    - name: imagevector.gardener.cloud/target-version
+      value: 1.18.x
+    name: cloud-controller-manager
+    relation: external
+    type: ociImage
+    version: v1.18.20
+  - access:
+      imageReference: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws:v1.19.14
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.19.14
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: cloud-controller-manager
+    - name: imagevector.gardener.cloud/repository
+      value: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/gardener/cloud-provider-aws
+    - name: imagevector.gardener.cloud/target-version
+      value: 1.19.x
+    name: cloud-controller-manager
+    relation: external
+    type: ociImage
+    version: v1.19.14
+  - access:
+      imageReference: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws:v1.20.10
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.20.10
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: cloud-controller-manager
+    - name: imagevector.gardener.cloud/repository
+      value: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/gardener/cloud-provider-aws
+    - name: imagevector.gardener.cloud/target-version
+      value: 1.20.x
+    name: cloud-controller-manager
+    relation: external
+    type: ociImage
+    version: v1.20.10
+  - access:
+      imageReference: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws:v1.21.4
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.21.4
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: cloud-controller-manager
+    - name: imagevector.gardener.cloud/repository
+      value: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/gardener/cloud-provider-aws
+    - name: imagevector.gardener.cloud/target-version
+      value: 1.21.x
+    name: cloud-controller-manager
+    relation: external
+    type: ociImage
+    version: v1.21.4
+  - access:
+      imageReference: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws:v1.22.0
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.22.0
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: cloud-controller-manager
+    - name: imagevector.gardener.cloud/repository
+      value: eu.gcr.io/gardener-project/kubernetes/cloud-provider-aws
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/gardener/cloud-provider-aws
+    - name: imagevector.gardener.cloud/target-version
+      value: '>= 1.22'
+    name: cloud-controller-manager
+    relation: external
+    type: ociImage
+    version: v1.22.0
+  - access:
+      imageReference: k8s.gcr.io/provider-aws/aws-ebs-csi-driver:v1.1.4
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.1.4
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-driver
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/provider-aws/aws-ebs-csi-driver
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-sigs/aws-ebs-csi-driver
+    name: csi-driver
+    relation: external
+    type: ociImage
+    version: v1.1.4
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/csi-provisioner:v2.1.2
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v2.1.2
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-provisioner
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/csi-provisioner
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/external-provisioner
+    name: csi-provisioner
+    relation: external
+    type: ociImage
+    version: v2.1.2
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/csi-attacher:v3.3.0
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v3.3.0
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-attacher
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/csi-attacher
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/external-attacher
+    name: csi-attacher
+    relation: external
+    type: ociImage
+    version: v3.3.0
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/csi-snapshotter:v3.0.3
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v3.0.3
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-snapshotter
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/csi-snapshotter
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/external-snapshotter
+    name: csi-snapshotter
+    relation: external
+    type: ociImage
+    version: v3.0.3
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/csi-resizer:v0.5.0
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v0.5.0
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-resizer
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/csi-resizer
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/external-resizer
+    name: csi-resizer
+    relation: external
+    type: ociImage
+    version: v0.5.0
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/snapshot-controller:v3.0.3
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v3.0.3
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-snapshot-controller
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/snapshot-controller
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/external-snapshotter
+    name: csi-snapshot-controller
+    relation: external
+    type: ociImage
+    version: v3.0.3
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v1.3.0
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v1.3.0
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-node-driver-registrar
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/csi-node-driver-registrar
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/node-driver-registrar
+    name: csi-node-driver-registrar
+    relation: external
+    type: ociImage
+    version: v1.3.0
+  - access:
+      imageReference: k8s.gcr.io/sig-storage/livenessprobe:v2.3.0
+      type: ociRegistry
+    extraIdentity:
+      imagevector-gardener-cloud+tag: v2.3.0
+    labels:
+    - name: imagevector.gardener.cloud/name
+      value: csi-liveness-probe
+    - name: imagevector.gardener.cloud/repository
+      value: k8s.gcr.io/sig-storage/livenessprobe
+    - name: imagevector.gardener.cloud/source-repository
+      value: github.com/kubernetes-csi/livenessprobe
+    name: csi-liveness-probe
+    relation: external
+    type: ociImage
+    version: v2.3.0
+  - access:
+      imageReference: alpine:3.12.1
+      type: ociRegistry
+    name: alpine
+    relation: external
+    type: ociImage
+    version: 3.12.1
+  - access:
+      imageReference: k8s.gcr.io/pause:3.1
+      type: ociRegistry
+    name: pause
+    relation: external
+    type: ociImage
+    version: "3.1"
+  - access:
+      digest: sha256:542654b42e02a9979e0328a34e031b70ea77685bcc081cd1dd77cbc446f4d11b
+      type: localOciBlob
+    name: blueprint
+    relation: local
+    type: blueprint
+    version: v1.29.0
+  - access:
+      digest: sha256:080593eab2b1b85c8a5209010f8fd25926be2fc7697d4e6be5cd343037c91809
+      type: localOciBlob
+    name: gardener-extension-provider-aws-chart
+    relation: local
+    type: helm.io/chart
+    version: v1.29.0
+  sources:
+  - access:
+      commit: 5747fa6c586b29e2ba28b28c9340887b2563a7dd
+      ref: refs/tags/v1.29.0
+      repoUrl: github.com/gardener/gardener-extension-provider-aws
+      type: github
+    labels:
+    - name: cloud.gardener/cicd/source
+      value:
+        repository-classification: main
+    name: github_com_gardener_gardener-extension-provider-aws
+    type: git
+    version: v1.29.0
+  version: v1.29.0
+meta:
+  schemaVersion: v2
+

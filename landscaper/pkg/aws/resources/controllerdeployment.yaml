@@ -19,7 +19,7 @@ providerConfig:
 
     replicaCount: 3
 
-    # Replaced by .imports.controllerRegistration.resources if provided
+    # Replaced by .imports.controllerDeployment.resources if provided
     resources:
       requests:
         cpu: "20m"
@@ -28,30 +28,25 @@ providerConfig:
         cpu: "100m"
         memory: "256Mi"
 
-    # Replaced by .imports.controllerRegistration.vpa if provided
+    # Replaced by .imports.controllerDeployment.vpa if provided
     vpa:
       enabled: true
       updatePolicy:
         updateMode: "Auto"
 
+    # The number of concurrentSyncs will be replaced by .imports.controllerDeployment.concurrentSyncs if provided
     controllers:
       backupentry:
-        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
         concurrentSyncs: 20
       controlplane:
-        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
         concurrentSyncs: 20
       dnsrecord:
-        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
         concurrentSyncs: 20
       healthcheck:
-        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
         concurrentSyncs: 20
       infrastructure:
-        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
         concurrentSyncs: 20
       worker:
-        # Replaced by .imports.controllerRegistration.concurrentSyncs if provided
         concurrentSyncs: 20
 
     config:
