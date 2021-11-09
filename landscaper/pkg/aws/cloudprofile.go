@@ -18,7 +18,7 @@ import (
 	"context"
 	_ "embed"
 	"encoding/json"
-	"github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws/v1alpha1"
+
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	mi "github.com/gardener/landscaper-utils/machineimages/pkg/machineimages"
 	"github.com/go-logr/logr"
@@ -27,6 +27,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/yaml"
+
+	"github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws/v1alpha1"
 )
 
 //go:embed resources/cloudprofile.yaml
@@ -35,11 +37,11 @@ var rawDefaultCloudProfile []byte
 //go:embed resources/os_image_config.yaml
 var rawMachineImagesProvider []byte
 
-const(
+const (
 	cloudProfileName = "aws"
 )
 
-func applyCloudProfile(ctx context.Context, log logr.Logger, clt client.Client , cloudProfile *v1beta1.CloudProfile) error {
+func applyCloudProfile(ctx context.Context, log logr.Logger, clt client.Client, cloudProfile *v1beta1.CloudProfile) error {
 	log.Info("Applying cloud profile")
 
 	c := emptyCloudProfile()
@@ -77,7 +79,7 @@ func constructCloudProfile(ctx context.Context, log logr.Logger, imports *Import
 
 	cloudProfile.Spec.MachineImages = machineImages
 	cloudProfile.Spec.ProviderConfig = providerConfig
-	cloudProfile.Spec.Kubernetes = v1beta1.KubernetesSettings{ Versions: imports.CloudProfile.KubernetesVersions }
+	cloudProfile.Spec.Kubernetes = v1beta1.KubernetesSettings{Versions: imports.CloudProfile.KubernetesVersions}
 	if len(imports.CloudProfile.Regions) > 0 {
 		cloudProfile.Spec.Regions = imports.CloudProfile.Regions
 	}
@@ -154,7 +156,7 @@ func constructProviderConfig(machineImages []mi.MachineImage) (*runtime.RawExten
 	}
 
 	cloudProfileConfig := &v1alpha1.CloudProfileConfig{
-		TypeMeta:      metav1.TypeMeta{
+		TypeMeta: metav1.TypeMeta{
 			Kind:       "CloudProfileConfig",
 			APIVersion: "aws.provider.extensions.gardener.cloud/v1alpha1",
 		},

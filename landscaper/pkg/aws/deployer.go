@@ -18,9 +18,9 @@ import (
 	"context"
 	_ "embed"
 	"fmt"
+
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	"github.com/gardener/landscaper-utils/deployutils/pkg/utils"
-	"github.com/go-logr/logr"
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -46,57 +46,57 @@ func Process(ctx context.Context, o *utils.Options) error {
 
 	switch o.Operation {
 	case utils.OperationReconcile:
-		return deploy(ctx, o.Log, clt, imports)
+		return deploy(ctx, o, clt, imports)
 
 	case utils.OperationDelete:
-		return undeploy(ctx, o.Log, clt)
+		return undeploy(ctx, o, clt)
 
 	default:
 		return fmt.Errorf("unknown operation: %q", o.Operation)
 	}
 }
 
-func deploy(ctx context.Context, log logr.Logger, clt client.Client, imports *Imports) error {
-	controllerDeployment, err := constructControllerDeployment(imports)
+func deploy(ctx context.Context, o *utils.Options, clt client.Client, imports *Imports) error {
+	controllerDeployment, err := constructControllerDeployment(o, imports)
 	if err != nil {
 		return err
 	}
 
-	controllerRegistration, err := constructControllerRegistration(log, imports)
+	controllerRegistration, err := constructControllerRegistration(o.Log, imports)
 	if err != nil {
 		return err
 	}
 
-	cloudProfile, err := constructCloudProfile(ctx, log, imports)
+	cloudProfile, err := constructCloudProfile(ctx, o.Log, imports)
 	if err != nil {
 		return err
 	}
 
-	if err := applyControllerDeployment(ctx, log, clt, controllerDeployment); err != nil {
+	if err := applyControllerDeployment(ctx, o.Log, clt, controllerDeployment); err != nil {
 		return err
 	}
 
-	if err := applyControllerRegistration(ctx, log, clt, controllerRegistration); err != nil {
+	if err := applyControllerRegistration(ctx, o.Log, clt, controllerRegistration); err != nil {
 		return err
 	}
 
-	if err := applyCloudProfile(ctx, log, clt, cloudProfile); err != nil {
+	if err := applyCloudProfile(ctx, o.Log, clt, cloudProfile); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func undeploy(ctx context.Context, log logr.Logger, clt client.Client) error {
-	if err := deleteCloudProfile(ctx, log, clt); err != nil {
+func undeploy(ctx context.Context, o *utils.Options, clt client.Client) error {
+	if err := deleteCloudProfile(ctx, o.Log, clt); err != nil {
 		return err
 	}
 
-	if err := deleteControllerRegistration(ctx, log, clt); err != nil {
+	if err := deleteControllerRegistration(ctx, o.Log, clt); err != nil {
 		return err
 	}
 
-	if err := deleteControllerDeployment(ctx, log, clt); err != nil {
+	if err := deleteControllerDeployment(ctx, o.Log, clt); err != nil {
 		return err
 	}
 

@@ -18,7 +18,9 @@ import (
 	"context"
 	_ "embed"
 	"encoding/json"
+
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
+	"github.com/gardener/landscaper-utils/deployutils/pkg/utils"
 	"github.com/go-logr/logr"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -30,11 +32,11 @@ import (
 //go:embed resources/controllerdeployment.yaml
 var rawDefaultControllerDeployment []byte
 
-const(
+const (
 	controllerDeploymentName = "provider-aws"
 )
 
-func applyControllerDeployment(ctx context.Context, log logr.Logger, clt client.Client , controllerDeployment *v1beta1.ControllerDeployment) error {
+func applyControllerDeployment(ctx context.Context, log logr.Logger, clt client.Client, controllerDeployment *v1beta1.ControllerDeployment) error {
 	log.Info("Applying controller deployment")
 
 	c := emptyControllerDeployment()
@@ -58,7 +60,14 @@ func deleteControllerDeployment(ctx context.Context, log logr.Logger, clt client
 	return nil
 }
 
-func constructControllerDeployment(imports *Imports) (*v1beta1.ControllerDeployment, error) {
+func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1.ControllerDeployment, error) {
+	const(
+		resourceNameAlpine      = "alpine"
+		resourceNamePause       = "pause"
+		resourceNameProviderAWS = "gardener-extension-provider-aws"
+	)
+
+	// read defaults
 	controllerDeployment := &v1beta1.ControllerDeployment{}
 	if err := yaml.Unmarshal(rawDefaultControllerDeployment, controllerDeployment); err != nil {
 		return nil, err
@@ -74,6 +83,21 @@ func constructControllerDeployment(imports *Imports) (*v1beta1.ControllerDeploym
 
 	providerConfig.Chart = imports.ControllerDeployment.Chart
 
+	repository, tag, err := o.GetOCIRepositoryAndTag(resourceNameProviderAWS)
+	if err != nil {
+		return nil, err
+	}
+	providerConfig.Values["image"] = map[string]string{
+		"repository": repository,
+		"tag": tag,
+	}
+
+	images, err := getImageReferences(o, resourceNameAlpine, resourceNamePause)
+	if err != nil {
+		return nil, err
+	}
+	providerConfig.Values["images"] = images
+
 	if imports.ControllerDeployment.ConcurrentSyncs > 0 {
 		providerConfig.Values["controllers"] = newControllersConfig(imports.ControllerDeployment.ConcurrentSyncs)
 	}
@@ -83,7 +107,7 @@ func constructControllerDeployment(imports *Imports) (*v1beta1.ControllerDeploym
 	}
 
 	if imports.ControllerDeployment.VPA != nil {
-		providerConfig.Values["values"] = imports.ControllerDeployment.VPA
+		providerConfig.Values["vpa"] = imports.ControllerDeployment.VPA
 	}
 
 	rawConfig, err := json.Marshal(providerConfig)
@@ -92,10 +116,25 @@ func constructControllerDeployment(imports *Imports) (*v1beta1.ControllerDeploym
 	}
 
 	controllerDeployment.ProviderConfig = runtime.RawExtension{
-		Raw:    rawConfig,
+		Raw: rawConfig,
 	}
 
 	return controllerDeployment, nil
+}
+
+func getImageReferences(o *utils.Options, resourceNames ...string) (map[string]string, error) {
+	imageRefs := map[string]string{}
+
+	for _, resourceName := range resourceNames {
+		imageRef, err := o.GetOCIImageReference(resourceName)
+		if err != nil {
+			return nil, err
+		}
+
+		imageRefs[resourceName] = imageRef
+	}
+
+	return imageRefs, nil
 }
 
 func newControllersConfig(concurrentSyncs int) map[string]interface{} {

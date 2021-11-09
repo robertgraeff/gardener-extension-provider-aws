@@ -17,6 +17,7 @@ package aws
 import (
 	"context"
 	_ "embed"
+
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	"github.com/go-logr/logr"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -28,11 +29,11 @@ import (
 //go:embed resources/controllerregistration.yaml
 var rawDefaultControllerRegistration []byte
 
-const(
+const (
 	controllerRegistrationName = "provider-aws"
 )
 
-func applyControllerRegistration(ctx context.Context, log logr.Logger, clt client.Client , controllerRegistration *v1beta1.ControllerRegistration) error {
+func applyControllerRegistration(ctx context.Context, log logr.Logger, clt client.Client, controllerRegistration *v1beta1.ControllerRegistration) error {
 	log.Info("Applying controller registration")
 
 	c := emptyControllerRegistration()
