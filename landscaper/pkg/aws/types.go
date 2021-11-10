@@ -24,7 +24,6 @@ import (
 type Imports struct {
 	Cluster                lsv1alpha1.Target      `json:"cluster" yaml:"cluster"`
 	CloudProfile           CloudProfile           `json:"cloudProfile,omitempty"`
-	ControllerDeployment   ControllerDeployment   `json:"controllerDeployment,omitempty"`
 	ControllerRegistration ControllerRegistration `json:"controllerRegistration,omitempty"`
 }
 
@@ -39,15 +38,12 @@ type CloudProfile struct {
 	Regions                 []v1beta1.Region                   `json:"regions,omitempty"`
 }
 
-type ControllerDeployment struct {
+type ControllerRegistration struct {
 	// base64 encoded string of the tarred and gzipped gardener-extension-provider-aws chart
 	Chart                string      `json:"chart,omitempty"`
 	ConcurrentSyncs      int         `json:"concurrentSyncs,omitempty"`
 	Resources            interface{} `json:"resources,omitempty"`
 	VPA                  interface{} `json:"vpa,omitempty"`
 	ImageVectorOverwrite string      `json:"imageVectorOverwrite,omitempty"`
-}
-
-type ControllerRegistration struct {
-	ControllerResources []v1beta1.ControllerResource `json:"controllerResources,omitempty"`
+	ControllerResources  []v1beta1.ControllerResource `json:"controllerResources,omitempty"`
 }

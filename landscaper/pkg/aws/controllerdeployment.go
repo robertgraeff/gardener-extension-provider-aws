@@ -81,7 +81,7 @@ func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1
 		return nil, err
 	}
 
-	providerConfig.Chart = imports.ControllerDeployment.Chart
+	providerConfig.Chart = imports.ControllerRegistration.Chart
 
 	repository, tag, err := o.GetOCIRepositoryAndTag(resourceNameProviderAWS)
 	if err != nil {
@@ -98,20 +98,20 @@ func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1
 	}
 	providerConfig.Values["images"] = images
 
-	if imports.ControllerDeployment.ConcurrentSyncs > 0 {
-		providerConfig.Values["controllers"] = newControllersConfig(imports.ControllerDeployment.ConcurrentSyncs)
+	if imports.ControllerRegistration.ConcurrentSyncs > 0 {
+		providerConfig.Values["controllers"] = newControllersConfig(imports.ControllerRegistration.ConcurrentSyncs)
 	}
 
-	if imports.ControllerDeployment.Resources != nil {
-		providerConfig.Values["resources"] = imports.ControllerDeployment.Resources
+	if imports.ControllerRegistration.Resources != nil {
+		providerConfig.Values["resources"] = imports.ControllerRegistration.Resources
 	}
 
-	if imports.ControllerDeployment.VPA != nil {
-		providerConfig.Values["vpa"] = imports.ControllerDeployment.VPA
+	if imports.ControllerRegistration.VPA != nil {
+		providerConfig.Values["vpa"] = imports.ControllerRegistration.VPA
 	}
 
-	if len(imports.ControllerDeployment.ImageVectorOverwrite) > 0 {
-		providerConfig.Values["imageVectorOverwrite"] = imports.ControllerDeployment.ImageVectorOverwrite
+	if len(imports.ControllerRegistration.ImageVectorOverwrite) > 0 {
+		providerConfig.Values["imageVectorOverwrite"] = imports.ControllerRegistration.ImageVectorOverwrite
 	}
 
 	rawConfig, err := json.Marshal(providerConfig)
