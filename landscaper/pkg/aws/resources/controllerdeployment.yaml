@@ -4,18 +4,20 @@ metadata:
   name: provider-aws
 type: helm
 providerConfig:
-#  {{- $chart := getResource .cd "name" "gardener-extension-provider-aws-chart" }}
-#  chart: {{ resolve ( $chart.access ) | toString | b64enc }}
+
+# chart: the helm chart "gardener-extension-provider-aws" as base64 string.
+#        Resource name in the component descriptor: "gardener-extension-provider-aws-chart"
 
   values:
-#    image:
-#      {{- $image := getResource .cd "name" "gardener-extension-provider-aws" }}
-#      repository: {{ ociRefRepo ( $image.access.imageReference ) }}
-#      tag: {{ ociRefVersion ( $image.access.imageReference ) }}
 
-#    images:
-#      alpine: {{ (getResource .cd "name" "alpine").access.imageReference }}
-#      pause: {{ (getResource .cd "name" "pause").access.imageReference }}
+#   image:
+#     {{- $image := getResource .cd "name" "gardener-extension-provider-aws" }}
+#     repository: {{ ociRefRepo ( $image.access.imageReference ) }}
+#     tag: {{ ociRefVersion ( $image.access.imageReference ) }}
+
+#   images:
+#     alpine: {{ (getResource .cd "name" "alpine").access.imageReference }}
+#     pause: {{ (getResource .cd "name" "pause").access.imageReference }}
 
     replicaCount: 3
 

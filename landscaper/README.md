@@ -1,13 +1,20 @@
-# Landscaper Based Deployment of Component "provider-aws"
+# Deployment of Component "gardener-extension-provider-aws"
+
+This directory contains the Landscaper based deployment of component `gardener-extension-provider-aws`.
+The deployment is defined in a [blueprint](blueprint/blueprint.yaml) with a single [container deploy item](blueprint/...).
+In particular, we do not use an aggregated blueprint with sub-installations for pre and post processing steps.
+
+The deploy code that is executed by the container deployer is implemented in Go.
+It creates a `ControllerDeployment`, `ControllerRegistration`, and a `CloudProfile`.
 
 Consumes landscaper-utils lib for:
 - machine image computation
+- image vector computation (todo)
 - utilities 
-  - `options` object to read imports, write exports
-  - read a resource item from the component descriptor,
-  - and function to create a kubernetes client from a target,
+  - reading imports
+  - reading image references from the component descriptor,
+  - creating a kubernetes client from a Target import parameter,
 
-Will consume the image vector function
 
 ## Debug Configuration 
 
@@ -26,20 +33,24 @@ COMPONENT_DESCRIPTOR_PATH=.../gardener-extension-provider-aws/landscaper/pkg/exa
 
 - Controller deployment
   - Implementation of function `constructControllerDeployment`
-  - Can we access the chart that must be included in the controller deployment?
+  - How can we access the chart that must be included in the controller deployment? Template it into the deploy item.
   - Image vector from lib, not from import
 
-- Utils 
-  - Function `getResolve` to read an entry from the component descriptor
+- Image vector
+  - where should the charts/images.yaml file go to?
+  - honour component descriptor?
+  - use lss?
 
 - The cloudprofile, controllerdeployment, and controllerregistration,
   do they have a namespace ("garden") or not?
 
 - Blueprint
-  - Container DeployItem 
+  - Container DeployItem with a generic image using an executable in the blueprint directory
+  - Adjust imports of the blueprint (for example machine images)
   - The imports in the blueprint must correspond with the go structures in landscaper/pkg/aws/imports.go
 
 - Simplify logger in landscaper-utils/deployutils
 
 - Dev Process
-  - Include chart
+  - Include chart as base64 string in the example imports.yaml
+  - Build the deploy code and put the executable into the blueprint directory
