@@ -41,10 +41,11 @@ type CloudProfile struct {
 
 type ControllerDeployment struct {
 	// base64 encoded string of the tarred and gzipped gardener-extension-provider-aws chart
-	Chart           string      `json:"chart,omitempty"`
-	ConcurrentSyncs int         `json:"concurrentSyncs,omitempty"`
-	Resources       interface{} `json:"resources,omitempty"`
-	VPA             interface{} `json:"vpa,omitempty"`
+	Chart                string      `json:"chart,omitempty"`
+	ConcurrentSyncs      int         `json:"concurrentSyncs,omitempty"`
+	Resources            interface{} `json:"resources,omitempty"`
+	VPA                  interface{} `json:"vpa,omitempty"`
+	ImageVectorOverwrite string      `json:"imageVectorOverwrite,omitempty"`
 }
 
 type ControllerRegistration struct {

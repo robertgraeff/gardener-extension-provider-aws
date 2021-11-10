@@ -110,6 +110,10 @@ func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1
 		providerConfig.Values["vpa"] = imports.ControllerDeployment.VPA
 	}
 
+	if len(imports.ControllerDeployment.ImageVectorOverwrite) > 0 {
+		providerConfig.Values["imageVectorOverwrite"] = imports.ControllerDeployment.ImageVectorOverwrite
+	}
+
 	rawConfig, err := json.Marshal(providerConfig)
 	if err != nil {
 		return nil, err
