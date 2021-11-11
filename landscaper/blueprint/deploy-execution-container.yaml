@@ -1,0 +1,21 @@
+deployItems:
+- name: provider-aws-container-deployer
+  type: landscaper.gardener.cloud/container
+  target:
+    name: {{ index .imports "cluster" "metadata" "name" }}
+    namespace: {{ index .imports "cluster" "metadata" "namespace" }}
+  config:
+    apiVersion: container.deployer.landscaper.gardener.cloud/v1alpha1
+    kind: ProviderConfiguration
+    {{- $image := getResource .cd "name" "gardener-extension-provider-aws-deployer" }}
+    image: {{ $image.access.imageReference }}
+    args: []
+    command: []
+    importValues:
+      {{ toYaml .imports | indent 6 }}
+      {{- $chart := getResource .cd "name" "gardener-extension-provider-aws-chart" }}
+      chart: {{ resolve ( $chart.access ) | toString | b64enc }}
+      imageVectorOverwrite:
+      {{- generateImageOverwrite .cd .imports.lssComponentDescriptor | toYaml | nindent 8 }}
+    componentDescriptor:
+      {{ toJson .componentDescriptorDef | indent 6 }}

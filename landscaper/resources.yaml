@@ -18,3 +18,10 @@ input:
   compress: true
   preserveDir: true
 ...
+---
+type: ociImage
+name: gardener-extension-provider-aws-deployer
+relation: local
+  type: ociRegistry
+  imageReference: eu.gcr.io/gardener-project/landscaper-gardener-deployers/provider-aws-deployer:v1.30.0-dev-68275971bb55800e2956edc2e024125b1893f2f4
+...

@@ -89,14 +89,14 @@ imports:
         scheme:
           type: object
 
-- name: imageVectorOverwrite
-  schema:
-    type: object
-    properties:
-      images:
-        type: array
-        items:
-          type: object
+#- name: imageVectorOverwrite
+#  schema:
+#    type: object
+#    properties:
+#      images:
+#        type: array
+#        items:
+#          type: object
 
 exports: []
 
@@ -105,6 +105,6 @@ exportExecutions: []
 subinstallations: []
 
 deployExecutions:
-- file: /deploy-execution-manifests.yaml
+- file: /deploy-execution-container.yaml
   name: manifests
   type: GoTemplate
