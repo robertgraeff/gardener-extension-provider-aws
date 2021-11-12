@@ -156,12 +156,21 @@ func (o *Options) readComponentDescriptor() (*cdv2.ComponentDescriptor, error) {
 		return nil, err
 	}
 
-	cd := &cdv2.ComponentDescriptor{}
+	cd := &cdv2.ComponentDescriptorList{}
 	if err := codec.Decode(data, cd); err != nil {
-		return nil, err
+		cdStart := string(data)
+		if len(data) > 50 {
+			cdStart = cdStart[:50]
+		}
+
+		return nil, fmt.Errorf("error decoding component descriptor - component descriptor: %s - error: %w ", cdStart, err)
 	}
 
-	return cd, nil
+	if len(cd.Components) != 1 {
+		return nil, fmt.Errorf("found %s component descriptors, expected one ", len(cd.Components))
+	}
+
+	return &cd.Components[0], nil
 }
 
 // getResourceByName returns the entry with the given name from the "resources" section of the component descriptor.

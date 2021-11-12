@@ -2,7 +2,7 @@
 type: blueprint
 name: blueprint
 relation: local
-input: 
+input:
   type: dir
   path: ./blueprint
   mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
@@ -22,6 +22,7 @@ input:
 type: ociImage
 name: gardener-extension-provider-aws-deployer
 relation: local
+access:
   type: ociRegistry
-  imageReference: eu.gcr.io/gardener-project/landscaper-gardener-deployers/provider-aws-deployer:v1.30.0-dev-68275971bb55800e2956edc2e024125b1893f2f4
+  imageReference: eu.gcr.io/gardener-project/landscaper-gardener-deployers/provider-aws-deployer:v1.30.0-dev-994d69d3bdcc6e0850e7ffd53ec5cb352647b736
 ...

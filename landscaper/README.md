@@ -29,6 +29,15 @@ EXPORTS_PATH=.../gardener-extension-provider-aws/landscaper/pkg/example/exports.
 COMPONENT_DESCRIPTOR_PATH=.../gardener-extension-provider-aws/landscaper/pkg/example/component-descriptor.yaml
 ```
 
+## Upload Component Descriptor
+
+To manually build and push the component descriptor to the oci registry, 
+`cd` into the repository root directory and run:
+
+```shell
+make cnudie-cd-build-push
+```
+
 ## To Do
 
 - Controller deployment

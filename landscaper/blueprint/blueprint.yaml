@@ -19,15 +19,12 @@ imports:
       kubernetesVersions:
         type: array
       machineImages:
-        type: data
         schema:
           $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
       machineImagesLs:
-        type: data
         schema:
           $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
       machineImagesProviderLs:
-        type: data
         schema:
           $ref: "cd://component/componentReferences/machine-images/resources/machine-images-schema"
       disableMachineImages:
