@@ -18,6 +18,7 @@ import (
 	"context"
 	_ "embed"
 	"encoding/json"
+	"fmt"
 
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	"github.com/gardener/landscaper-utils/deployutils/pkg/utils"
@@ -27,6 +28,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/yaml"
+	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 )
 
 //go:embed resources/controllerdeployment.yaml
@@ -62,9 +64,10 @@ func deleteControllerDeployment(ctx context.Context, log logr.Logger, clt client
 
 func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1.ControllerDeployment, error) {
 	const(
-		resourceNameAlpine      = "alpine"
-		resourceNamePause       = "pause"
-		resourceNameProviderAWS = "gardener-extension-provider-aws"
+		resourceNameAlpine       = "alpine"
+		resourceNamePause        = "pause"
+		resourceNameProviderAWS  = "gardener-extension-provider-aws"
+		componentNameProviderAWS = "github.com/gardener/gardener-extension-provider-aws"
 	)
 
 	// read defaults
@@ -83,16 +86,29 @@ func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1
 
 	providerConfig.Chart = imports.ControllerRegistration.Chart
 
-	repository, tag, err := o.GetOCIRepositoryAndTag(resourceNameProviderAWS)
+	cds, err := o.GetComponentDescriptorsByName(componentNameProviderAWS)
 	if err != nil {
 		return nil, err
 	}
+
+	if len(cds) != 1 {
+		return nil, fmt.Errorf("expected exactly one component descriptor with name %s, but found %s",
+			componentNameProviderAWS, len(cds))
+	}
+
+	cdProviderAWS := &cds[0]
+
+	repository, tag, err := o.GetOCIRepositoryAndTag(cdProviderAWS, resourceNameProviderAWS)
+	if err != nil {
+		return nil, err
+	}
+
 	providerConfig.Values["image"] = map[string]string{
 		"repository": repository,
 		"tag": tag,
 	}
 
-	images, err := getImageReferences(o, resourceNameAlpine, resourceNamePause)
+	images, err := getImageReferences(o, cdProviderAWS, resourceNameAlpine, resourceNamePause)
 	if err != nil {
 		return nil, err
 	}
@@ -126,11 +142,11 @@ func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1
 	return controllerDeployment, nil
 }
 
-func getImageReferences(o *utils.Options, resourceNames ...string) (map[string]string, error) {
+func getImageReferences(o *utils.Options, cd *cdv2.ComponentDescriptor , resourceNames ...string) (map[string]string, error) {
 	imageRefs := map[string]string{}
 
 	for _, resourceName := range resourceNames {
-		imageRef, err := o.GetOCIImageReference(resourceName)
+		imageRef, err := o.GetOCIImageReference(cd, resourceName)
 		if err != nil {
 			return nil, err
 		}

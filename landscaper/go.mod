@@ -6,8 +6,8 @@ require (
 	github.com/gardener/gardener v1.34.1
 	github.com/gardener/gardener-extension-provider-aws v1.29.1
 	//github.com/gardener/landscaper-utils v0.1.0 // indirect
-	github.com/gardener/landscaper-utils/deployutils   v0.0.0-20211115111857-ec062918f625
-	github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115111857-ec062918f625
+	github.com/gardener/landscaper-utils/deployutils   v0.0.0-20211115155816-a36c4149b98c
+	github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115155816-a36c4149b98c
 	github.com/gardener/landscaper/apis v0.15.1
 	github.com/go-logr/logr v0.4.0
 	github.com/spf13/cobra v1.2.1
