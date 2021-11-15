@@ -9,6 +9,7 @@ github.com/evanphx/json-patch
 # github.com/gardener/component-cli v0.29.0
 github.com/gardener/component-cli/ociclient/oci
 # github.com/gardener/component-spec/bindings-go v0.0.53
+## explicit
 github.com/gardener/component-spec/bindings-go/apis
 github.com/gardener/component-spec/bindings-go/apis/v2
 github.com/gardener/component-spec/bindings-go/apis/v2/jsonscheme
@@ -26,11 +27,11 @@ github.com/gardener/gardener/pkg/utils/version
 ## explicit
 github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws
 github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws/v1alpha1
-# github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115155816-a36c4149b98c
+# github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115164528-882ac36f281d
 ## explicit
 github.com/gardener/landscaper-utils/deployutils/pkg/logger
 github.com/gardener/landscaper-utils/deployutils/pkg/utils
-# github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115155816-a36c4149b98c
+# github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115164528-882ac36f281d
 ## explicit
 github.com/gardener/landscaper-utils/machineimages/pkg/machineimages
 # github.com/gardener/landscaper/apis v0.15.1
