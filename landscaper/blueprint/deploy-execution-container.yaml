@@ -12,10 +12,11 @@ deployItems:
     args: []
     command: []
     importValues:
-      {{ toYaml .imports | indent 6 }}
+      cluster:
+{{ .imports.cluster | toYaml | indent 8 }}
       {{- $chart := getResource .cd "name" "gardener-extension-provider-aws-chart" }}
       chart: {{ resolve ( $chart.access ) | toString | b64enc }}
       imageVectorOverwrite:
       {{- generateImageOverwrite .cd .imports.lssComponentDescriptor | toYaml | nindent 8 }}
     componentDescriptor:
-      {{ toJson .componentDescriptorDef | indent 6 }}
+{{ .componentDescriptorDef | toYaml | indent 6 }}
