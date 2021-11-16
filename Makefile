@@ -15,6 +15,7 @@
 EXTENSION_PREFIX            := gardener-extension
 NAME                        := provider-aws
 ADMISSION_NAME              := admission-aws
+DEPLOYER_NAME               := deployer-aws
 REGISTRY                    := eu.gcr.io/gardener-project/gardener
 IMAGE_PREFIX                := $(REGISTRY)/extensions
 REPO_ROOT                   := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -181,8 +182,7 @@ cnudie-docker-images:
 	@echo "Building docker images for version $(EFFECTIVE_VERSION) for registry $(IMAGE_PREFIX)"
 	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(NAME):$(EFFECTIVE_VERSION) -f Dockerfile -m 6g --target $(EXTENSION_PREFIX)-$(NAME) .
 	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(ADMISSION_NAME):$(EFFECTIVE_VERSION) -f Dockerfile -m 6g --target $(EXTENSION_PREFIX)-$(ADMISSION_NAME) .
-	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(NAME)/aws-deployer:$(EFFECTIVE_VERSION) -f landscaper/Dockerfile -m 6g ./landscaper
-
+	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(DEPLOYER_NAME):$(EFFECTIVE_VERSION) -f landscaper/Dockerfile -m 6g --target $(DEPLOYER_NAME) ./landscaper
 
 .PHONY: cnudie-docker-push
 cnudie-docker-push:
@@ -198,9 +198,6 @@ cnudie-docker-all: cnudie-docker-images cnudie-docker-push
 .PHONY: cnudie-cd-build-push
 cnudie-cd-build-push:
 	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/generate-cd-personal.sh
-
-.PHONY: cnudie-build-push-all
-cnudie-build-push-all: cnudie-docker-images cnudie-docker-push cnudie-cd-build-push
 
 .PHONY: cnudie-create-installation
 cnudie-create-installation:

@@ -31,12 +31,6 @@ install:
 	go install -mod=vendor $(LANDSCAPER_DIR)/cmd/...
 
 
-.PHONY: docker-images
-docker-images:
-	@echo "Building docker images for version $(EFFECTIVE_VERSION)"
-	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(PROVIDER_AWS_DEPLOYER_IMAGE_REPOSITORY):$(EFFECTIVE_VERSION) -f Dockerfile .
-
-
 .PHONY: docker-push
 docker-push:
 	@echo "Pushing docker images for version $(EFFECTIVE_VERSION) to registry $(REGISTRY)"
