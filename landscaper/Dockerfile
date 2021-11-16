@@ -9,7 +9,7 @@ RUN make install
 FROM alpine:3.13.2 AS base
 
 ############ gardener-extension-provider-aws
-FROM base AS landscaper-extension-provider-aws
+FROM base AS aws-deployer
 
-COPY --from=builder /go/bin/landscaper-extension-provider-aws /landscaper-extension-provider-aws
-ENTRYPOINT ["/landscaper-extension-provider-aws"]
+COPY --from=builder /go/bin/landscaper-extension-provider-aws /aws-deployer
+ENTRYPOINT ["/aws-deployer"]

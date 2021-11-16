@@ -18,6 +18,11 @@ gardener-extension-provider-aws:
             image: 'eu.gcr.io/gardener-project/gardener/extensions/admission-aws'
             dockerfile: 'Dockerfile'
             target: gardener-extension-admission-aws
+          gardener-extension-provider-aws-deployer:
+            registry: 'gcr-readwrite'
+            image: 'eu.gcr.io/gardener-project/gardener/extensions/provider-aws/aws-deployer'
+            dockerfile: 'Dockerfile'
+            target: gardener-extension-provider-aws-deployer
   jobs:
     head-update:
       traits:
