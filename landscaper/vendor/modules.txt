@@ -27,6 +27,8 @@ github.com/gardener/gardener/pkg/utils/version
 ## explicit
 github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws
 github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws/v1alpha1
+# github.com/gardener/landscaper-utils v0.2.0
+## explicit
 # github.com/gardener/landscaper-utils/deployutils v0.0.0-20211117083715-be968a426f84
 ## explicit
 github.com/gardener/landscaper-utils/deployutils/pkg/logger

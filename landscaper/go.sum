@@ -424,6 +424,8 @@ github.com/gardener/hvpa-controller v0.3.1/go.mod h1:rjsb3BPKJFMluudZ8/bhCCDQfFC
 github.com/gardener/image-vector v0.5.0/go.mod h1:32SHGcbmmueeK9VkawsFcEbsoENXQPIuuYiFBUP+vMQ=
 github.com/gardener/landscaper-utils v0.1.0 h1:fGOyjZcgAjoZLqEqz0jl0Dhl8yeGdwtqziJ3lWfpMK8=
 github.com/gardener/landscaper-utils v0.1.0/go.mod h1:Hppj4E5NwCW3zpGJdhXfWzk8MrVA6+9fPOy5ZcEw8z0=
+github.com/gardener/landscaper-utils v0.2.0 h1:B1AsEOANflSIz6AoXdSPfUnjPnVKXw7Q5VPbBGM8yK0=
+github.com/gardener/landscaper-utils v0.2.0/go.mod h1:Hppj4E5NwCW3zpGJdhXfWzk8MrVA6+9fPOy5ZcEw8z0=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211104151042-e8eeda1247ec h1:E3iNA++VlZe4A33r+9Pag8rV+lWAn85nfkDLHnRnInQ=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211104151042-e8eeda1247ec/go.mod h1:+W1dR2EppgQdRxUQKHyZJTMGSi8onPR3FHfGkvzEmvU=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211109085447-6f2d6c915d44 h1:7moIl49DugyAW/vvpcq2xW3iYu+JX38RvhG+9dFKC4I=

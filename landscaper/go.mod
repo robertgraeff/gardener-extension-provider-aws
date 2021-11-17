@@ -6,8 +6,8 @@ require (
 	github.com/gardener/component-spec/bindings-go v0.0.53
 	github.com/gardener/gardener v1.34.1
 	github.com/gardener/gardener-extension-provider-aws v1.29.1
-	//github.com/gardener/landscaper-utils v0.1.0 // indirect
-	github.com/gardener/landscaper-utils/deployutils   v0.0.0-20211117083715-be968a426f84
+	github.com/gardener/landscaper-utils v0.2.0 // indirect
+	github.com/gardener/landscaper-utils/deployutils v0.0.0-20211117083715-be968a426f84
 	github.com/gardener/landscaper-utils/machineimages v0.0.0-20211117083715-be968a426f84
 	github.com/gardener/landscaper/apis v0.15.1
 	github.com/go-logr/logr v0.4.0

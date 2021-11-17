@@ -9,7 +9,7 @@ RUN make install
 FROM alpine:3.13.2 AS base
 
 ############# deployer-aws
-FROM base AS deployer-aws
+FROM base AS provider-aws-deployer
 
-COPY --from=builder /go/bin/landscaper-extension-provider-aws /deployer-aws
-ENTRYPOINT ["/deployer-aws"]
+COPY --from=builder /go/bin/landscaper-extension-provider-aws /provider-aws-deployer
+ENTRYPOINT ["/provider-aws-deployer"]

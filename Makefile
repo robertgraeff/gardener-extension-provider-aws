@@ -15,7 +15,7 @@
 EXTENSION_PREFIX            := gardener-extension
 NAME                        := provider-aws
 ADMISSION_NAME              := admission-aws
-DEPLOYER_NAME               := deployer-aws
+DEPLOYER_NAME               := provider-aws-deployer
 REGISTRY                    := eu.gcr.io/gardener-project/gardener
 IMAGE_PREFIX                := $(REGISTRY)/extensions
 REPO_ROOT                   := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -173,12 +173,12 @@ integration-test-dnsrecord:
 		--access-key-id='$(shell cat $(ACCESS_KEY_ID_FILE))' \
 		--secret-access-key='$(shell cat $(SECRET_ACCESS_KEY_FILE))'
 
-#####################################################################
-# Rules for cnudie component descriptors dev setup #
-#####################################################################
+#############################################
+# Rules for component descriptors dev setup #
+#############################################
 
-.PHONY: cnudie-docker-images
-cnudie-docker-images:
+.PHONY: deployer-docker-images
+deployer-docker-images:
 	@echo "Building docker images for version $(EFFECTIVE_VERSION) for registry $(IMAGE_PREFIX)"
 	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(NAME):$(EFFECTIVE_VERSION) -f Dockerfile -m 6g --target $(EXTENSION_PREFIX)-$(NAME) .
 	@docker build --build-arg EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) -t $(IMAGE_PREFIX)/$(ADMISSION_NAME):$(EFFECTIVE_VERSION) -f Dockerfile -m 6g --target $(EXTENSION_PREFIX)-$(ADMISSION_NAME) .
