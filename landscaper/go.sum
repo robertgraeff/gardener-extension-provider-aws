@@ -450,6 +450,8 @@ github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115155816-a36c4149b
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115155816-a36c4149b98c/go.mod h1:eiUlp1iZv6wO6gSZJnl/Gz7QaXFDwCSeBAMKOcZecM8=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115164528-882ac36f281d h1:pZAY64ix2zKSpo3AHL+KJ6/HlYzYBKN0j6P+kE9C+Hc=
 github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115164528-882ac36f281d/go.mod h1:eiUlp1iZv6wO6gSZJnl/Gz7QaXFDwCSeBAMKOcZecM8=
+github.com/gardener/landscaper-utils/deployutils v0.0.0-20211117083715-be968a426f84 h1:O4MbpS3JJ78bqsUuImlg1zO/64GIJ/rGaOLbbImwjX8=
+github.com/gardener/landscaper-utils/deployutils v0.0.0-20211117083715-be968a426f84/go.mod h1:eiUlp1iZv6wO6gSZJnl/Gz7QaXFDwCSeBAMKOcZecM8=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211104151042-e8eeda1247ec h1:rHn+OnkP2bq74YT/KRs4ea8k8/aigQf1f7JdUYVWR90=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211104151042-e8eeda1247ec/go.mod h1:3gI7Ttvb+8suwKKCVYChLj9pv5isvK1JSEzTTfsvWJs=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211109085447-6f2d6c915d44 h1:FBnNaf+mFrmI+1PJHAhn6EMrx4TBTbY7fx3ReLE+gCg=
@@ -476,6 +478,8 @@ github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115155816-a36c414
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115155816-a36c4149b98c/go.mod h1:3gI7Ttvb+8suwKKCVYChLj9pv5isvK1JSEzTTfsvWJs=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115164528-882ac36f281d h1:j7jEMieJCxLuTuAk4AuGmRAiagqtpRz7vkc2MbOIEhA=
 github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115164528-882ac36f281d/go.mod h1:3gI7Ttvb+8suwKKCVYChLj9pv5isvK1JSEzTTfsvWJs=
+github.com/gardener/landscaper-utils/machineimages v0.0.0-20211117083715-be968a426f84 h1:TaGSscnnhGKPUw7j7df3I8kSpLKJshh2TeZwbB2D8Nw=
+github.com/gardener/landscaper-utils/machineimages v0.0.0-20211117083715-be968a426f84/go.mod h1:3gI7Ttvb+8suwKKCVYChLj9pv5isvK1JSEzTTfsvWJs=
 github.com/gardener/landscaper/apis v0.7.0/go.mod h1:++MW27PlSnbWM4AJipikw62RSprxO5TKVxZ8nh0e4Yw=
 github.com/gardener/landscaper/apis v0.15.1 h1:jhpMI4mfVvZTcdmRDJiDoYJ2m6fBRoHptvGoE44UBYo=
 github.com/gardener/landscaper/apis v0.15.1/go.mod h1:XFDwxQgoSR0qHv8WzYuT7MC4yEVR6vJ/PWiQB4B0cfA=

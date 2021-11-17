@@ -27,11 +27,11 @@ github.com/gardener/gardener/pkg/utils/version
 ## explicit
 github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws
 github.com/gardener/gardener-extension-provider-aws/pkg/apis/aws/v1alpha1
-# github.com/gardener/landscaper-utils/deployutils v0.0.0-20211115164528-882ac36f281d
+# github.com/gardener/landscaper-utils/deployutils v0.0.0-20211117083715-be968a426f84
 ## explicit
 github.com/gardener/landscaper-utils/deployutils/pkg/logger
 github.com/gardener/landscaper-utils/deployutils/pkg/utils
-# github.com/gardener/landscaper-utils/machineimages v0.0.0-20211115164528-882ac36f281d
+# github.com/gardener/landscaper-utils/machineimages v0.0.0-20211117083715-be968a426f84
 ## explicit
 github.com/gardener/landscaper-utils/machineimages/pkg/machineimages
 # github.com/gardener/landscaper/apis v0.15.1

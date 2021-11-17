@@ -18,8 +18,7 @@ import (
 	"context"
 	_ "embed"
 	"encoding/json"
-	"fmt"
-
+	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	"github.com/gardener/gardener/pkg/apis/core/v1beta1"
 	"github.com/gardener/landscaper-utils/deployutils/pkg/utils"
 	"github.com/go-logr/logr"
@@ -28,7 +27,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/yaml"
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 )
 
 //go:embed resources/controllerdeployment.yaml
@@ -86,19 +84,12 @@ func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1
 
 	providerConfig.Chart = imports.ControllerRegistration.Chart
 
-	cds, err := o.GetComponentDescriptorsByName(componentNameProviderAWS)
+	cdProviderAWS, err := o.GetComponentDescriptorByName(componentNameProviderAWS)
 	if err != nil {
 		return nil, err
 	}
 
-	if len(cds) != 1 {
-		return nil, fmt.Errorf("expected exactly one component descriptor with name %s, but found %s",
-			componentNameProviderAWS, len(cds))
-	}
-
-	cdProviderAWS := &cds[0]
-
-	repository, tag, err := o.GetOCIRepositoryAndTag(cdProviderAWS, resourceNameProviderAWS)
+	repository, tag, err := o.GetResourceOCIRepositoryAndTag(cdProviderAWS, resourceNameProviderAWS)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +137,7 @@ func getImageReferences(o *utils.Options, cd *cdv2.ComponentDescriptor , resourc
 	imageRefs := map[string]string{}
 
 	for _, resourceName := range resourceNames {
-		imageRef, err := o.GetOCIImageReference(cd, resourceName)
+		imageRef, err := o.GetResourceOCIImageReference(cd, resourceName)
 		if err != nil {
 			return nil, err
 		}
