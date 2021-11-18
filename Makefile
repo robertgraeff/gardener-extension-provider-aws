@@ -200,7 +200,7 @@ deployer-docker-push:
 
 .PHONY: cnudie-cd-build-push
 cnudie-cd-build-push:
-	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/generate-cd-personal.sh
+	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/generate-cd.sh
 
 .PHONY: cnudie-create-installation
 cnudie-create-installation:
