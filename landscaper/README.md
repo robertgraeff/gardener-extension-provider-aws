@@ -4,8 +4,8 @@ This directory contains the Landscaper based deployment of component `gardener-e
 The deployment is defined in a [blueprint](blueprint/blueprint.yaml) with a single [container deploy item](blueprint/...).
 In particular, we do not use an aggregated blueprint with sub-installations for pre and post processing steps.
 
-The deploy code that is executed by the container deployer is implemented in Go.
-It creates a `ControllerDeployment`, `ControllerRegistration`, and a `CloudProfile`.
+The deploy code is implemented in Go and executed by the container deployer.
+It creates a `ControllerDeployment`, `ControllerRegistration`, and a `CloudProfile` on the target cluster.
 
 ### Default configuration
 

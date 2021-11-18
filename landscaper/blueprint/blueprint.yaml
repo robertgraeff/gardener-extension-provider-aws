@@ -86,15 +86,6 @@ imports:
         scheme:
           type: object
 
-#- name: imageVectorOverwrite
-#  schema:
-#    type: object
-#    properties:
-#      images:
-#        type: array
-#        items:
-#          type: object
-
 exports: []
 
 exportExecutions: []
