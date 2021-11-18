@@ -18,10 +18,16 @@ Some of them can be overwritten and new values can be set by corresponding field
 
 ### Machine Images
 
+From [landscaper-utils](https://github.com/gardener/landscaper-utils) we use:
+- the [function to compute machine images](https://github.com/gardener/landscaper-utils/blob/master/machineimages/pkg/machineimages/machine_images.go) 
+- the [machine images schema](https://github.com/gardener/landscaper-utils/blob/master/machineimages/.landscaper/machine-images/schemata/machine-images.json)
+to type some imports.
 
-Consumes landscaper-utils lib for:
-- machine image computation
-- image vector computation (todo)
+### Image Vector
+
+
+### Utilities
+
 - utilities 
   - reading imports
   - reading image references from the component descriptor,
@@ -81,3 +87,5 @@ make cnudie-cd-build-push
 - Dev Process
   - Include chart as base64 string in the example imports.yaml
   - Build the deploy code and put the executable into the blueprint directory
+
+- Tests

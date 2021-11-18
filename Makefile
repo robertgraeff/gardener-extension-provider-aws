@@ -204,4 +204,4 @@ cnudie-cd-build-push:
 
 .PHONY: cnudie-create-installation
 cnudie-create-installation:
-	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/create-installation-personal.sh
+	@EFFECTIVE_VERSION=$(EFFECTIVE_VERSION) ./hack/create-installation.sh
