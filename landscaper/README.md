@@ -25,6 +25,9 @@ to type some imports.
 
 ### Image Vector
 
+The image vector for the provider-aws component is computed during the templating of the 
+[deploy item](./blueprint/deploy-execution-container.yaml).
+The deploy code can access the result as part of its imports. 
 
 ### Utilities
 
