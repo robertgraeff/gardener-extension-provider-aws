@@ -64,8 +64,8 @@ func deleteCloudProfile(ctx context.Context, log logr.Logger, clt client.Client)
 	return nil
 }
 
-func constructCloudProfile(ctx context.Context, log logr.Logger, imports *Imports) (*v1beta1.CloudProfile, error) {
-	log.Info("Constructing cloud profile")
+func buildCloudProfile(ctx context.Context, log logr.Logger, imports *Imports) (*v1beta1.CloudProfile, error) {
+	log.Info("Building cloud profile")
 
 	cloudProfile := &v1beta1.CloudProfile{}
 	if err := yaml.Unmarshal(rawDefaultCloudProfile, cloudProfile); err != nil {
@@ -117,7 +117,7 @@ func getMachineImages(ctx context.Context, log logr.Logger, imports *Imports) (
 		return nil, nil, err
 	}
 
-	providerConfig, err := constructProviderConfig(machineImages)
+	providerConfig, err := buildProviderConfig(machineImages)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -149,7 +149,7 @@ func convertMachineImages(machineImages []mi.MachineImage) ([]v1beta1.MachineIma
 	return result, nil
 }
 
-func constructProviderConfig(machineImages []mi.MachineImage) (*runtime.RawExtension, error) {
+func buildProviderConfig(machineImages []mi.MachineImage) (*runtime.RawExtension, error) {
 	awsMachineImages, err := convertToAwsMachineImages(machineImages)
 	if err != nil {
 		return nil, err

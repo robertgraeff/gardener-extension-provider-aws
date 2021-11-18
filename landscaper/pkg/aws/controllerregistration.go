@@ -56,11 +56,11 @@ func deleteControllerRegistration(ctx context.Context, log logr.Logger, clt clie
 	return nil
 }
 
-func constructControllerRegistration(
+func buildControllerRegistration(
 	log logr.Logger,
 	imports *Imports,
 ) (*v1beta1.ControllerRegistration, error) {
-	log.Info("Constructing controller registration")
+	log.Info("Building controller registration")
 
 	controllerRegistration := &v1beta1.ControllerRegistration{}
 	if err := yaml.Unmarshal(rawDefaultControllerRegistration, controllerRegistration); err != nil {

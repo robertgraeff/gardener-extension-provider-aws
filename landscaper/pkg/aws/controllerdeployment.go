@@ -60,7 +60,7 @@ func deleteControllerDeployment(ctx context.Context, log logr.Logger, clt client
 	return nil
 }
 
-func constructControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1.ControllerDeployment, error) {
+func buildControllerDeployment(o *utils.Options, imports *Imports) (*v1beta1.ControllerDeployment, error) {
 	const(
 		resourceNameAlpine       = "alpine"
 		resourceNamePause        = "pause"

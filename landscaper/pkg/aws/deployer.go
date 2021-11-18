@@ -57,17 +57,17 @@ func Process(ctx context.Context, o *utils.Options) error {
 }
 
 func deploy(ctx context.Context, o *utils.Options, clt client.Client, imports *Imports) error {
-	controllerDeployment, err := constructControllerDeployment(o, imports)
+	controllerDeployment, err := buildControllerDeployment(o, imports)
 	if err != nil {
 		return err
 	}
 
-	controllerRegistration, err := constructControllerRegistration(o.Log, imports)
+	controllerRegistration, err := buildControllerRegistration(o.Log, imports)
 	if err != nil {
 		return err
 	}
 
-	cloudProfile, err := constructCloudProfile(ctx, o.Log, imports)
+	cloudProfile, err := buildCloudProfile(ctx, o.Log, imports)
 	if err != nil {
 		return err
 	}

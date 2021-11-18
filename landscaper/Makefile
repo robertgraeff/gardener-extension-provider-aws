@@ -14,25 +14,13 @@
 
 EXTENSION_PREFIX                       := gardener-extension
 NAME                                   := provider-aws
-LANDSCAPER_NAME                        := landscaper-extension-provider-aws
-PROVIDER_AWS_DEPLOYER_IMAGE_REPOSITORY := eu.gcr.io/gardener-project/landscaper-gardener-deployers/provider-aws-deployer
 LANDSCAPER_DIR                         := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 REPO_ROOT                              := $(LANDSCAPER_DIR)/..
-HACK_DIR                               := $(REPO_ROOT)/hack
-GARDENER_HACK_DIR                      := $(REPO_ROOT)/vendor/github.com/gardener/gardener/hack
 VERSION                                := $(shell cat "$(REPO_ROOT)/VERSION")
 EFFECTIVE_VERSION                      := $(VERSION)-$(shell git rev-parse HEAD)
 
 
-.PHONY: install
-install:
+.PHONY: deployer-install
+deployer-install:
 	CGO_ENABLED=0 GOOS=$(go env GOOS) GOARCH=$(go env GOARCH) GO111MODULE=on \
-	LD_FLAGS="-w -X github.com/gardener/$(EXTENSION_PREFIX)-$(NAME)/landscaper/pkg/version.Version=$(EFFECTIVE_VERSION)" \
 	go install -mod=vendor $(LANDSCAPER_DIR)/cmd/...
-
-
-.PHONY: docker-push
-docker-push:
-	@echo "Pushing docker images for version $(EFFECTIVE_VERSION) to registry $(REGISTRY)"
-	@if ! docker images $(PROVIDER_AWS_DEPLOYER_IMAGE_REPOSITORY) | awk '{ print $$2 }' | grep -q -F $(EFFECTIVE_VERSION); then echo "$(PROVIDER_AWS_DEPLOYER_IMAGE_REPOSITORY) version $(EFFECTIVE_VERSION) is not yet built. Please run 'make docker-images'"; false; fi
-	@docker push $(PROVIDER_AWS_DEPLOYER_IMAGE_REPOSITORY):$(EFFECTIVE_VERSION)
