@@ -25,9 +25,21 @@ to type some imports.
 
 ### Image Vector
 
-The image vector for the provider-aws component is computed during the templating of the 
-[deploy item](./blueprint/deploy-execution-container.yaml).
-The deploy code can access the result as part of its imports. 
+Landscaper offers a templating function 
+[generateImageOverwrite](https://github.com/gardener/landscaper/blob/master/docs/usage/TemplateExecutors.md#template-executors) 
+for the computation of an image vector. The image vector for the provider-aws component is computed during the 
+templating of the [deploy item](./blueprint/deploy-execution-container.yaml):
+
+```yaml
+imageVectorOverwrite:
+{{- generateImageOverwrite .cd .imports.lssComponentDescriptor | toYaml | nindent 8 }}
+```
+
+Function `generateImageOverwrite` gets as input the component descriptor of the provider-aws component (`.cd`)
+and a component descriptor list with one element, namely the lss component descriptor (`.imports.lssComponentDescriptor`).
+This component descriptor list comes from the import parameter `lssComponentDescriptor` of the blueprint.
+After the templating, the resulting image vector is contained in field `.spec.config.importValues.imageVectorOverwrite`
+of the deploy item. The Go code executed by the container deployer can access these import values.
 
 ### Utilities
 
@@ -37,18 +49,45 @@ The deploy code can access the result as part of its imports.
   - creating a kubernetes client from a Target import parameter,
 
 
-## Debugging the Deploy Code with Example Data 
+## Installing and running the deploy program locally
 
-Enter the kubeconfig of the target cluster in $REPO_ROOT/landscaper/pkg/example/imports.yaml
+For test purposes, one can install and run the deploy code for the provider-aws component from the command line.
+In this case the Landscaper is not involved. 
+On the other hand, if one deploys with Landscaper, the same code is executed by the container deployer.
 
-Start $REPO_ROOT/landscaper/cmd/main.go with the following environment variables (adjust the paths!):
+We assume that variable `REPO_ROOT` contains the path to the root directory of the current git repository.
+Install the deploy command for the provider-aws component:
+
+```shell
+cd ${REPO_ROOT}/landscaper
+make install-deployer
+```
+
+Start a deployment of the provider-aws component with the following command.
+Note that the imports.yaml and component-descriptor.yaml files contain only example data that might be adjusted.
+In particular, you must maintain the kubeconfig of the target cluster in the imports.yaml.
+
+```shell
+landscaper-extension-provider-aws \
+  --operation RECONCILE \
+  --imports-path "${REPO_ROOT}/landscaper/pkg/example/imports.yaml" \
+  --exports-path "${REPO_ROOT}/landscaper/pkg/example/exports.yaml" \
+  --component-desciptor-path "${REPO_ROOT}/landscaper/pkg/example/component-descriptor.yaml"
+```
+
+Instead of the command arguments, you can set the following environment variables: 
 
 ```text
 OPERATION=RECONCILE
-IMPORTS_PATH=.../gardener-extension-provider-aws/landscaper/pkg/example/imports.yaml
-EXPORTS_PATH=.../gardener-extension-provider-aws/landscaper/pkg/example/exports.yaml
-COMPONENT_DESCRIPTOR_PATH=.../gardener-extension-provider-aws/landscaper/pkg/example/component-descriptor.yaml
+IMPORTS_PATH=${REPO_ROOT}/landscaper/pkg/example/imports.yaml
+EXPORTS_PATH=${REPO_ROOT}/landscaper/pkg/example/exports.yaml
+COMPONENT_DESCRIPTOR_PATH=${REPO_ROOT}/landscaper/pkg/example/component-descriptor.yaml
 ```
+
+In order to uninstall the provider-aws component, set `OPERATION=DELETE`.
+
+Use `${REPO_ROOT}/landscaper/cmd/main.go` as entry point if you want to debug the deploy code.
+
 
 ## Upload Component Descriptor
 
@@ -58,6 +97,7 @@ To manually build and push the component descriptor to the oci registry,
 ```shell
 make cnudie-cd-build-push
 ```
+
 
 ## To Do
 
